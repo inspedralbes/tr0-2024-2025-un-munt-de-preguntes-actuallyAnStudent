@@ -11,7 +11,7 @@ $obj = array(
 function calcularRespCorr($dades){
     $quantitat=0;
     foreach ($dades["preguntes"] as $key => $value) {
-        if ($_SESSION["pregunta"]->answers[$key]==$value) {
+        if ($_SESSION["pregunta"]->answers[$key]==$value["resposta"]+1) {
             $quantitat++;
         }
     }

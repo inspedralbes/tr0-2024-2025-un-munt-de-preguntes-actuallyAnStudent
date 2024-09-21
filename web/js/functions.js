@@ -94,7 +94,7 @@ function enviarJSON(){
     return res.json()})
   .then(response => {
     console.log(response);
-    strElement += `Felicitats, has respos ${response.respostesCorectes} de ${response.totalRespostes}`;
+    strElement += `Felicitats, has respos bé ${response.respostesCorrectes} de ${response.respostesTotal}`;
     tauler.innerHTML=strElement;
   })
   .catch(error => console.log("Error: ", error));
@@ -106,12 +106,12 @@ function verificacions(boto){
   if (boto.className==="anterior" && estatDeLaPartida.contPregunta==0) {
     boto.className = "notUsable";
   }
-  if (boto.className==="seguent" && estatDeLaPartida.contPregunta==data.length-1) {
+  if (boto.className==="seguent" && estatDeLaPartida.contPregunta==data.preguntes.length-1) {
     boto.className = "notUsable";
   }
-  /*if (boto.className==="enviar" && estatDeLaPartida.contPregunta!=data.length-1) {
+  if (boto.className==="enviar" && estatDeLaPartida.contPregunta!=data.preguntes.length-1) {
     boto.className = "notUsable";
-  }*/
+  }
   if (boto.className==="reset" && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta==-1) {
     boto.className = "notUsable";
   }
