@@ -10,19 +10,19 @@ for ($i = 0; $i < $numPreg; $i++) {
     $question[] = $arr["preguntes"][$pos]["pregunta"];
     $answers[] = $arr["preguntes"][$pos]["resposta_correcta"];
     $answer[] = $arr["preguntes"][$pos]["respostes"];
-    $urlImage[] = $arr["preguntes"][$pos]["imatge"];
+    //$urlImage[] = $arr["preguntes"][$pos]["imatge"];
     array_splice($arr["preguntes"], $pos, 1);
 }
 $_SESSION["pregunta"] = new stdClass();
 $_SESSION["pregunta"]->question = $question;
 $_SESSION["pregunta"]->answer = $answer;
 $_SESSION["pregunta"]->answers = $answers;
-$_SESSION["pregunta"]->urlImage = $urlImage;
+//$_SESSION["pregunta"]->urlImage = $urlImage;
 $_SESSION["respostaUsuari"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 $obj = new stdClass();
 $obj ->preguntes = $_SESSION["pregunta"]->question;
 $obj ->respostesP = $_SESSION["pregunta"]->answer;
-$obj ->imatgesR = $_SESSION["pregunta"]->urlImage;
+//$obj ->imatgesR = $_SESSION["pregunta"]->urlImage;
 
 echo json_encode($obj);

@@ -1,4 +1,5 @@
 let data;
+let numPreg = 10;
 const estatDeLaPartida = 
   {
     contPregunta: 0,
@@ -7,7 +8,7 @@ const estatDeLaPartida =
 
   fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/getPreguntes.php", {
     method: "POST",
-    body: JSON.stringify(10),
+    body: JSON.stringify(numPreg),
     headers: {
       "Content-Type": "application/json",
     },
@@ -37,9 +38,14 @@ function imprimirPregunta(){
   let strElement = '';
 
   strElement += `<p>${data.preguntes[estatDeLaPartida.contPregunta]}</p><br>`;
+  strElement += `<div style="display:flex">`;
   for (let i = 0; i < data.respostesP[estatDeLaPartida.contPregunta].length; i++) {
+    strElement += `<div class="rtas">`;
     strElement += `<button id="${i}" class="resposta">${data.respostesP[estatDeLaPartida.contPregunta][i].etiqueta}</button>`;
+    strElement += `<img src="${data.respostesP[estatDeLaPartida.contPregunta][i].imatge}" alt="image" width="100" height="150"><br>`;
+    strElement += `</div>`;
   }
+  strElement += `</div>`;
   strElement += `<button id="cancel" class="reset">Cancel·lar resposta</button>`;
   strElement += `<button class="anterior">Anterior</button>`;
   strElement += `<button class="seguent">Seguent</button>`;
@@ -78,14 +84,13 @@ function nextQuestion() {
 }
 
 function enviarJSON(){
+  const formData = new FormData();
+  formData.append("estatDeLaPartida", JSON.stringify(estatDeLaPartida));
   const tauler = document.getElementById("partida");
   let strElement = "";
   fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/finalitza.php", {
     method: "POST",
-    body: JSON.stringify(estatDeLaPartida),
-    headers: {
-      "Content-Type": "application/json",
-    },
+    body: formData,
   })
   .then(res => {
     if (!res.ok) {
@@ -94,12 +99,17 @@ function enviarJSON(){
     return res.json()})
   .then(response => {
     console.log(response);
-    strElement += `Felicitats, has respos bé ${response.respostesCorrectes} de ${response.respostesTotal}`;
+    strElement += `Felicitats, has respos bé ${response.respostesCorrectes} de ${numPreg}`;
+    strElement += `<br><br><br><br><button class="tornarAJugar">Tornar a jugar</button>`
     tauler.innerHTML=strElement;
   })
   .catch(error => console.log("Error: ", error));
   
   clearInterval(interval);
+}
+
+function reiniciarPartida(){
+  window.location.reload();
 }
 
 function verificacions(boto){
@@ -139,6 +149,9 @@ document.getElementById("partida").addEventListener('click', (event) => {
   if(event.target.className==="enviar"){
     enviarJSON();
   }
+  if(event.target.className==="tornarAJugar"){
+    reiniciarPartida();
+  }
 });
 
 let time=30;
@@ -146,12 +159,12 @@ const timer = document.getElementById("timer");
 const interval = setInterval(() => stillPlaying(timer), 1000);
 
 function stillPlaying(place){
-  if (time>0) {
+  if (time>=0) {
     place.innerHTML=time;
     console.log(time);
     time--;
   }else{
-    clearInterval(interval);
-    place.innerHTML="time out"
+    enviarJSON();
+    place.innerHTML= `time out`; 
   }
 }

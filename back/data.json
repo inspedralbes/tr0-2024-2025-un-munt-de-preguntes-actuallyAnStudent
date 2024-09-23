@@ -1,243 +1,224 @@
-{"preguntes": [
+{
+  "preguntes": [
     {
       "id": 1,
       "pregunta": "Quina marca utilitza el lema 'Just Do It'?",
       "respostes": [
-        { "id": 1, "etiqueta": "Nike" },
-        { "id": 2, "etiqueta": "Adidas" },
-        { "id": 3, "etiqueta": "Puma" },
-        { "id": 4, "etiqueta": "Reebok" }
+        { "id": 1, "etiqueta": "Nike", "imatge": "https://exemple.com/audi.jpg"},
+        { "id": 2, "etiqueta": "Adidas", "imatge": "https://exemple.com/audi.jpg"},
+        { "id": 3, "etiqueta": "Puma", "imatge": "https://exemple.com/audi.jpg"},
+        { "id": 4, "etiqueta": "Reebok", "imatge": "https://exemple.com/audi.jpg"}
       ],
-      "resposta_correcta": 1,
-      "imatge": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXEAAACICAMAAAAmsyvzAAAAclBMVEUAAAD///+vr684ODhmZmYrKyvi4uK3t7ciIiKdnZ3p6ekVFRXv7+9ra2u/v7+BgYF2dnb4+PiQkJBLS0tZWVlhYWG7u7uEhITLy8sdHR1DQ0MzMzPu7u6jo6ONjY0mJibV1dXQ0NAODg56eno8PDxISEi9Q3GQAAADg0lEQVR4nO3a2XqiMACG4YC74hLUiuJWbe//FgeyRyk6B9PpON97YpqE8PCLIUCFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAVpbTAVV1U4CHE5qJqVau0d0zRfVgXdbAz85idTla9uxl2P0sNme7e73UANMNGfdrzlnzu+nydRDuJNfe6FmEhV2lRtp0K3ZgvTbPnNP3xlevLVRz1IUvRudtfV9ad1NN7iO470p9CHPBID9TmuEs9UaS5EJ7OJvJnm+8Q7Qa2c2trC192c+ybxYZz4VPxHWhLvu0QGTyXukiuCKllGuyPxlsSvPpFnE086dd0oqjpHuyPxlsT9Kf584u9V1TauStbh7ki8JXHdMuvt0irxU1nudMW1V3b85ibxQ2qy2wmR61JxWphCuDuTeO/SKbf6K50Ny87ku4/6b/oycbMKqdO9zuqe26bz0SS+sDmnbvoXbj4P+9vE67JJ/JsO9Mf4MnGTpQpErZeHrYmLzA7gtzNXgnBaIfGHs0pytsvsB4nrFbucmMknrxpN8Rj0J/GWxO0azy6zHyR+1KXd1NWInh3cI/GWxP0yZK56PkjcXCeXJvFu1XjSd57BQwESb70D2rjIP+uev5d4fa9pEn8L+pN4W+L+Hkgt8H4v8XpWOeliGvQn8dbExcdYN8s6oQeJm+Vh+ak/N74xD/qTeEPie5+4EO9+jniQ+Ex/N3bE+sRe3G9B4i7x1Ca+1ZPvfKsueMtnE7/owlmIvR3JPuINnuJ+mfjq9vn6S5rP3ZpuZCeFpc2kWo8XpWuvL51tiU8nZ12o1t7mhv9ql+P9sH9z4uvqW5bR85fXtEn69mnVXJhHS/Js3iV0q7Nf2vbsItoTH5utkou770nsSPOwf2PiZpD4ue4rmifO0t6lO2IS/KHWd22JW4e6bhZV7aP+jYmPgo1fmk+8/uHnUU6jKHEV0BOJ6wlkGH158QTdmPgg+F5fmk9cTaHhm5tqAR4krl9DPk58bB7jLqWvO8b7bEx809j1Bbl7ShOif3dT/75d4s88V9Hn6MXWlueboZ3mK2ff/0Be2nAz68vsPHJBibwYVxUH/U8Pvbyomt/dmTdMpJSZ7EZjdDKZZZmU/SKPXiusBtG2zroeI9OJn+vhpFqEplmW3vUFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD45/wCEyQogz7x9OcAAAAASUVORK5CYII="
+      "resposta_correcta": 1
     },
     {
       "id": 2,
       "pregunta": "Quina marca de refrescos és coneguda pel seu logo vermell i blanc?",
       "respostes": [
-        { "id": 1, "etiqueta": "Pepsi" },
-        { "id": 2, "etiqueta": "Coca-Cola" },
-        { "id": 3, "etiqueta": "Fanta" },
-        { "id": 4, "etiqueta": "Sprite" }
+        { "id": 1, "etiqueta": "Pepsi", "imatge": "a" },
+        { "id": 2, "etiqueta": "Coca-Cola", "imatge": "a" },
+        { "id": 3, "etiqueta": "Fanta", "imatge": "a" },
+        { "id": 4, "etiqueta": "Sprite", "imatge": "a" }
       ],
-      "resposta_correcta": 2,
-      "imatge": "https://www.clubfamilias.com/sites/default/files/styles/wysiwyg/public/wysiwyg/Refrescos-light.jpg?itok=BQMC_AOV"
+      "resposta_correcta": 2
     },
     {
       "id": 3,
       "pregunta": "Quina marca de tecnologia va crear l'iPhone?",
       "respostes": [
-        { "id": 1, "etiqueta": "Samsung" },
-        { "id": 2, "etiqueta": "Google" },
-        { "id": 3, "etiqueta": "Apple" },
-        { "id": 4, "etiqueta": "Huawei" }
+        { "id": 1, "etiqueta": "Samsung", "imatge": "a" },
+        { "id": 2, "etiqueta": "Google", "imatge": "a" },
+        { "id": 3, "etiqueta": "Apple", "imatge": "a" },
+        { "id": 4, "etiqueta": "Huawei", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202309/20/00194612201049____11__1200x1200.jpg"
+      "resposta_correcta": 3
     },
     {
       "id": 4,
       "pregunta": "Quina marca de menjar ràpid utilitza el lema 'I'm Lovin' It'?",
       "respostes": [
-        { "id": 1, "etiqueta": "Burger King" },
-        { "id": 2, "etiqueta": "McDonald's" },
-        { "id": 3, "etiqueta": "KFC" },
-        { "id": 4, "etiqueta": "Taco Bell" }
+        { "id": 1, "etiqueta": "Burger King", "imatge": "a" },
+        { "id": 2, "etiqueta": "McDonald's", "imatge": "a" },
+        { "id": 3, "etiqueta": "KFC", "imatge": "a" },
+        { "id": 4, "etiqueta": "Taco Bell", "imatge": "a" }
       ],
-      "resposta_correcta": 2,
-      "imatge": "https://cdn.boldomatic.com/content/post/PFIIUg/i-m-loving-it?size=800"
+      "resposta_correcta": 2
     },
     {
       "id": 5,
       "pregunta": "Quina marca és coneguda pel seu logo en forma de fletxa que apunta del 'A' al 'Z'?",
       "respostes": [
-        { "id": 1, "etiqueta": "eBay" },
-        { "id": 2, "etiqueta": "Walmart" },
-        { "id": 3, "etiqueta": "Amazon" },
-        { "id": 4, "etiqueta": "Alibaba" }
+        { "id": 1, "etiqueta": "eBay", "imatge": "a" },
+        { "id": 2, "etiqueta": "Walmart", "imatge": "a" },
+        { "id": 3, "etiqueta": "Amazon", "imatge": "a" },
+        { "id": 4, "etiqueta": "Alibaba", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "data:image/jpeg;base64,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"
+      "resposta_correcta": 3
     },
     {
       "id": 6,
       "pregunta": "Quina marca de calçat esportiu té com a logo tres ratlles?",
       "respostes": [
-        { "id": 1, "etiqueta": "Nike" },
-        { "id": 2, "etiqueta": "Reebok" },
-        { "id": 3, "etiqueta": "Adidas" },
-        { "id": 4, "etiqueta": "Puma" }
+        { "id": 1, "etiqueta": "Nike", "imatge": "a" },
+        { "id": 2, "etiqueta": "Reebok", "imatge": "a" },
+        { "id": 3, "etiqueta": "Adidas", "imatge": "a" },
+        { "id": 4, "etiqueta": "Puma", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "https://static.vecteezy.com/system/resources/previews/010/994/239/non_2x/adidas-logo-black-symbol-clothes-design-icon-abstract-football-illustration-with-white-background-free-vector.jpg"
+      "resposta_correcta": 3
     },
     {
       "id": 7,
       "pregunta": "Quina marca automobilística japonesa utilitza el lema 'The Power of Dreams'?",
       "respostes": [
-        { "id": 1, "etiqueta": "Toyota" },
-        { "id": 2, "etiqueta": "Nissan" },
-        { "id": 3, "etiqueta": "Honda" },
-        { "id": 4, "etiqueta": "Mazda" }
+        { "id": 1, "etiqueta": "Toyota", "imatge": "a" },
+        { "id": 2, "etiqueta": "Nissan", "imatge": "a" },
+        { "id": 3, "etiqueta": "Honda", "imatge": "a" },
+        { "id": 4, "etiqueta": "Mazda", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "data:image/png;base64,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"
+      "resposta_correcta": 1
     },
     {
       "id": 8,
-      "pregunta": "Quina marca d'electrònica és famosa pel seu eslògan 'Life's Good'?",
+      "pregunta": "Quina marca de xocolata és coneguda pel seu logo en forma de 'M'?",
       "respostes": [
-        { "id": 1, "etiqueta": "Sony" },
-        { "id": 2, "etiqueta": "Samsung" },
-        { "id": 3, "etiqueta": "LG" },
-        { "id": 4, "etiqueta": "Panasonic" }
+        { "id": 1, "etiqueta": "Mars", "imatge": "a" },
+        { "id": 2, "etiqueta": "Snickers", "imatge": "a" },
+        { "id": 3, "etiqueta": "Milka", "imatge": "a" },
+        { "id": 4, "etiqueta": "Cadbury", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "https://exemple.com/lg.jpg"
+      "resposta_correcta": 1
     },
     {
       "id": 9,
-      "pregunta": "Quina marca de luxe utilitza un logo amb dues 'C' entrellaçades?",
+      "pregunta": "Quina marca de cotxes alemanys utilitza un logo amb quatre cercles entrellaçats?",
       "respostes": [
-        { "id": 1, "etiqueta": "Chanel" },
-        { "id": 2, "etiqueta": "Gucci" },
-        { "id": 3, "etiqueta": "Louis Vuitton" },
-        { "id": 4, "etiqueta": "Prada" }
+        { "id": 1, "etiqueta": "BMW", "imatge": "a" },
+        { "id": 2, "etiqueta": "Audi", "imatge": "a" },
+        { "id": 3, "etiqueta": "Mercedes-Benz", "imatge": "a" },
+        { "id": 4, "etiqueta": "Volkswagen", "imatge": "a" }
       ],
-      "resposta_correcta": 1,
-      "imatge": "https://exemple.com/chanel.jpg"
+      "resposta_correcta": 2
     },
     {
       "id": 10,
-      "pregunta": "Quina marca utilitza el logo d'una poma mossegada?",
+      "pregunta": "Quina marca de productes de neteja és coneguda pel seu logo de gat?",
       "respostes": [
-        { "id": 1, "etiqueta": "Google" },
-        { "id": 2, "etiqueta": "Apple" },
-        { "id": 3, "etiqueta": "Microsoft" },
-        { "id": 4, "etiqueta": "Intel" }
+        { "id": 1, "etiqueta": "Tide", "imatge": "a" },
+        { "id": 2, "etiqueta": "P&G", "imatge": "a" },
+        { "id": 3, "etiqueta": "Persil", "imatge": "a" },
+        { "id": 4, "etiqueta": "Cat's Best", "imatge": "a" }
       ],
-      "resposta_correcta": 2,
-      "imatge": "https://exemple.com/apple.jpg"
+      "resposta_correcta": 3
     },
     {
       "id": 11,
-      "pregunta": "Quina marca és famosa pel seu cafè instantani Nescafé?",
+      "pregunta": "Quina marca de telèfons mòbils és coneguda per les seves càmeres de qualitat?",
       "respostes": [
-        { "id": 1, "etiqueta": "Nestlé" },
-        { "id": 2, "etiqueta": "Starbucks" },
-        { "id": 3, "etiqueta": "Lavazza" },
-        { "id": 4, "etiqueta": "Dunkin'" }
+        { "id": 1, "etiqueta": "Nokia", "imatge": "a" },
+        { "id": 2, "etiqueta": "Apple", "imatge": "a" },
+        { "id": 3, "etiqueta": "Xiaomi", "imatge": "a" },
+        { "id": 4, "etiqueta": "OnePlus", "imatge": "a" }
       ],
-      "resposta_correcta": 1,
-      "imatge": "https://exemple.com/nestle.jpg"
+      "resposta_correcta": 2
     },
     {
       "id": 12,
-      "pregunta": "Quina marca de mòbils utilitza el lema 'The Next Big Thing'?",
+      "pregunta": "Quina marca de begudes energètiques és coneguda pel seu logo verd i blau?",
       "respostes": [
-        { "id": 1, "etiqueta": "Samsung" },
-        { "id": 2, "etiqueta": "Huawei" },
-        { "id": 3, "etiqueta": "Apple" },
-        { "id": 4, "etiqueta": "Xiaomi" }
+        { "id": 1, "etiqueta": "Red Bull", "imatge": "a" },
+        { "id": 2, "etiqueta": "Monster", "imatge": "a" },
+        { "id": 3, "etiqueta": "Rockstar", "imatge": "a" },
+        { "id": 4, "etiqueta": "Amp Energy", "imatge": "a" }
       ],
-      "resposta_correcta": 1,
-      "imatge": "https://exemple.com/samsung.jpg"
+      "resposta_correcta": 2
     },
     {
       "id": 13,
-      "pregunta": "Quina marca automobilística té com a logo un cavall rampant?",
+      "pregunta": "Quina marca de moda és coneguda pel seu logotip amb un cavall?",
       "respostes": [
-        { "id": 1, "etiqueta": "Ferrari" },
-        { "id": 2, "etiqueta": "Lamborghini" },
-        { "id": 3, "etiqueta": "Porsche" },
-        { "id": 4, "etiqueta": "Maserati" }
+        { "id": 1, "etiqueta": "Ralph Lauren", "imatge": "a" },
+        { "id": 2, "etiqueta": "Polo", "imatge": "a" },
+        { "id": 3, "etiqueta": "Calvin Klein", "imatge": "a" },
+        { "id": 4, "etiqueta": "Tommy Hilfiger", "imatge": "a" }
       ],
-      "resposta_correcta": 1,
-      "imatge": "https://exemple.com/ferrari.jpg"
+      "resposta_correcta": 1
     },
     {
       "id": 14,
-      "pregunta": "Quina marca de moda és coneguda pel seu patró de quadres?",
+      "pregunta": "Quina marca de joguines és famosa per la seva línia de figures de Lego?",
       "respostes": [
-        { "id": 1, "etiqueta": "Gucci" },
-        { "id": 2, "etiqueta": "Burberry" },
-        { "id": 3, "etiqueta": "Prada" },
-        { "id": 4, "etiqueta": "Versace" }
+        { "id": 1, "etiqueta": "Mattel", "imatge": "a" },
+        { "id": 2, "etiqueta": "Lego", "imatge": "a" },
+        { "id": 3, "etiqueta": "Hasbro", "imatge": "a" },
+        { "id": 4, "etiqueta": "Fisher-Price", "imatge": "a" }
       ],
-      "resposta_correcta": 2,
-      "imatge": "https://exemple.com/burberry.jpg"
+      "resposta_correcta": 2
     },
     {
       "id": 15,
-      "pregunta": "Quina marca de tecnologia és coneguda pel seu assistent digital Alexa?",
+      "pregunta": "Quina marca de roba és famosa per les seves samarretes de tirants?",
       "respostes": [
-        { "id": 1, "etiqueta": "Google" },
-        { "id": 2, "etiqueta": "Apple" },
-        { "id": 3, "etiqueta": "Amazon" },
-        { "id": 4, "etiqueta": "Microsoft" }
+        { "id": 1, "etiqueta": "H&M", "imatge": "a" },
+        { "id": 2, "etiqueta": "Zara", "imatge": "a" },
+        { "id": 3, "etiqueta": "Uniqlo", "imatge": "a" },
+        { "id": 4, "etiqueta": "Forever 21", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "https://exemple.com/amazon.jpg"
+      "resposta_correcta": 1
     },
     {
       "id": 16,
       "pregunta": "Quina marca de cervesa és famosa pel seu logotip en forma d’estrella vermella?",
       "respostes": [
-        { "id": 1, "etiqueta": "Heineken" },
-        { "id": 2, "etiqueta": "Corona" },
-        { "id": 3, "etiqueta": "Budweiser" },
-        { "id": 4, "etiqueta": "Guinness" }
+        { "id": 1, "etiqueta": "Heineken", "imatge": "https://exemple.com/heineken.jpg" },
+        { "id": 2, "etiqueta": "Corona", "imatge": "a" },
+        { "id": 3, "etiqueta": "Budweiser", "imatge": "a" },
+        { "id": 4, "etiqueta": "Guinness", "imatge": "a" }
       ],
-      "resposta_correcta": 1,
-      "imatge": "https://exemple.com/heineken.jpg"
+      "resposta_correcta": 1
     },
     {
       "id": 17,
       "pregunta": "Quina marca de vehicles elèctrics va ser fundada per Elon Musk?",
       "respostes": [
-        { "id": 1, "etiqueta": "Tesla" },
-        { "id": 2, "etiqueta": "Rivian" },
-        { "id": 3, "etiqueta": "Lucid Motors" },
-        { "id": 4, "etiqueta": "NIO" }
+        { "id": 1, "etiqueta": "Tesla", "imatge": "https://exemple.com/tesla.jpg" },
+        { "id": 2, "etiqueta": "Rivian", "imatge": "a" },
+        { "id": 3, "etiqueta": "Lucid Motors", "imatge": "a" },
+        { "id": 4, "etiqueta": "NIO", "imatge": "a" }
       ],
-      "resposta_correcta": 1,
-      "imatge": "https://exemple.com/tesla.jpg"
+      "resposta_correcta": 1
     },
     {
       "id": 18,
       "pregunta": "Quina marca de menjar ràpid té com a icona un coronel?",
       "respostes": [
-        { "id": 1, "etiqueta": "McDonald's" },
-        { "id": 2, "etiqueta": "Subway" },
-        { "id": 3, "etiqueta": "KFC" },
-        { "id": 4, "etiqueta": "Pizza Hut" }
+        { "id": 1, "etiqueta": "McDonald's", "imatge": "a" },
+        { "id": 2, "etiqueta": "Subway", "imatge": "a" },
+        { "id": 3, "etiqueta": "KFC", "imatge": "https://exemple.com/kfc.jpg" },
+        { "id": 4, "etiqueta": "Pizza Hut", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "https://exemple.com/kfc.jpg"
+      "resposta_correcta": 3
     },
     {
       "id": 19,
       "pregunta": "Quina marca de cotxes té un logo amb quatre cercles entrellaçats?",
       "respostes": [
-        { "id": 1, "etiqueta": "Audi" },
-        { "id": 2, "etiqueta": "Mercedes-Benz" },
-        { "id": 3, "etiqueta": "Volkswagen" },
-        { "id": 4, "etiqueta": "BMW" }
+        { "id": 1, "etiqueta": "Audi", "imatge": "https://exemple.com/audi.jpg" },
+        { "id": 2, "etiqueta": "Mercedes-Benz", "imatge": "a" },
+        { "id": 3, "etiqueta": "Volkswagen", "imatge": "a" },
+        { "id": 4, "etiqueta": "BMW", "imatge": "a" }
       ],
-      "resposta_correcta": 1,
-      "imatge": "https://exemple.com/audi.jpg"
+      "resposta_correcta": 1
     },
     {
       "id": 20,
       "pregunta": "Quina marca de serveis financers és coneguda pel seu logo amb una 'V' i una 'S' entrellaçades?",
       "respostes": [
-        { "id": 1, "etiqueta": "PayPal" },
-        { "id": 2, "etiqueta": "Mastercard" },
-        { "id": 3, "etiqueta": "Visa" },
-        { "id": 4, "etiqueta": "American Express" }
+        { "id": 1, "etiqueta": "PayPal", "imatge": "a" },
+        { "id": 2, "etiqueta": "Mastercard", "imatge": "a" },
+        { "id": 3, "etiqueta": "Visa", "imatge": "https://exemple.com/visa.jpg" },
+        { "id": 4, "etiqueta": "American Express", "imatge": "a" }
       ],
-      "resposta_correcta": 3,
-      "imatge": "https://exemple.com/visa.jpg"
+      "resposta_correcta": 3
     }
   ]
-  }
+}

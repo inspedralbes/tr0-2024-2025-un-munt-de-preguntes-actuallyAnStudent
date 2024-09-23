@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-header('Content-Type: application/json');
-$arr = json_decode(file_get_contents('php://input'), true);
+$arr = json_decode($_POST['estatDeLaPartida'], true);
 $obj = array(
     "respostesCorrectes" => calcularRespCorr($arr),
     "respostesTotal" => count($arr["preguntes"])
