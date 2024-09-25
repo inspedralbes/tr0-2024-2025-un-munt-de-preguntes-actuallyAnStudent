@@ -99,7 +99,7 @@ function enviarJSON(){
     return res.json()})
   .then(response => {
     console.log(response);
-    strElement += `Felicitats, has respos bé ${response.respostesCorrectes} de ${numPreg}`;
+    strElement += `Felicitats, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${numPreg}`;
     strElement += `<br><br><br><br><button class="tornarAJugar">Tornar a jugar</button>`
     tauler.innerHTML=strElement;
   })
