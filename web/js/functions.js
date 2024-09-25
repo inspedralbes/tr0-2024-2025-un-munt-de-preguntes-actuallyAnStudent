@@ -1,11 +1,12 @@
 let data;
 let numPreg = 10;
+let time=30;
 const estatDeLaPartida = 
   {
     contPregunta: 0,
     preguntes: []
   };
-
+  
   fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/getPreguntes.php", {
     method: "POST",
     body: JSON.stringify(numPreg),
@@ -88,6 +89,7 @@ function enviarJSON(){
   formData.append("estatDeLaPartida", JSON.stringify(estatDeLaPartida));
   const tauler = document.getElementById("partida");
   let strElement = "";
+
   fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/finalitza.php", {
     method: "POST",
     body: formData,
@@ -154,7 +156,6 @@ document.getElementById("partida").addEventListener('click', (event) => {
   }
 });
 
-let time=30;
 const timer = document.getElementById("timer");
 const interval = setInterval(() => stillPlaying(timer), 1000);
 
