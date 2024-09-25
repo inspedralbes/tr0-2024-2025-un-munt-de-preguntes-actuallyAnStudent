@@ -4,10 +4,10 @@
       "id": 1,
       "pregunta": "Quina marca utilitza el lema 'Just Do It'?",
       "respostes": [
-        { "id": 1, "etiqueta": "Nike", "imatge": "https://exemple.com/audi.jpg"},
-        { "id": 2, "etiqueta": "Adidas", "imatge": "https://exemple.com/audi.jpg"},
-        { "id": 3, "etiqueta": "Puma", "imatge": "https://exemple.com/audi.jpg"},
-        { "id": 4, "etiqueta": "Reebok", "imatge": "https://exemple.com/audi.jpg"}
+        { "id": 1, "etiqueta": "Nike", "imatge": "https://exemple.com/a.jpg"},
+        { "id": 2, "etiqueta": "Adidas", "imatge": "https://exemple.com/u.jpg"},
+        { "id": 3, "etiqueta": "Puma", "imatge": "https://exemple.com/d.jpg"},
+        { "id": 4, "etiqueta": "Reebok", "imatge": "https://exemple.com/i.jpg"}
       ],
       "resposta_correcta": 1
     },
