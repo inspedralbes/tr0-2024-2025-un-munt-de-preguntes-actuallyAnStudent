@@ -1,12 +1,7 @@
 <?php
 $data = file_get_contents("data.json");
 $arr = json_decode($data, true);
-$host = 'localhost';
-$username = 'quizz';
-$password = '1234';
-$dbname = 'quizz';
-
-$conn = new mysqli($host, $username, $password, $dbname);
+require_once("connexion.php");
 
 //eliminant les taules si existeixen
 $table = "preguntes";
@@ -76,4 +71,3 @@ foreach ($arr["preguntes"] as $key => $value) {
 }
 
 $conn->close();
-?>
