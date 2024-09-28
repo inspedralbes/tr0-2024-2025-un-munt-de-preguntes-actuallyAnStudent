@@ -1,6 +1,6 @@
 let data;
 let numPreg = 10;
-let time=30;
+let time=300;
 const estatDeLaPartida = 
   {
     contPregunta: 0,
@@ -60,9 +60,10 @@ function imprimirPregunta(){
 }
 
 function modificarPreguntes(idRespSel){
+  console.log(idRespSel);
   let pregunta = {
     id: estatDeLaPartida.contPregunta,
-    resposta: data.respostesP[estatDeLaPartida.contPregunta][idRespSel].id-1
+    resposta: idRespSel
   };
   estatDeLaPartida.preguntes.splice(estatDeLaPartida.contPregunta, 1, pregunta);
 }
