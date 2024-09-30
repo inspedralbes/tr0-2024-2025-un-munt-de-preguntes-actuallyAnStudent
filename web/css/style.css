@@ -7,3 +7,7 @@
   flex-direction: column;
   width: fit-content;
 }
+
+img, button{
+  margin-right: 10px;
+}

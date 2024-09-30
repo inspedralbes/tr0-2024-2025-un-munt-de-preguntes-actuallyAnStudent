@@ -4,12 +4,12 @@ $arr = json_decode($data, true);
 require_once("connexion.php");
 
 //eliminant les taules si existeixen
-$table = "preguntes";
-$table2 = "respostes";
+$table = "preguntes2";
+$table2 = "respostes2";
 
 $sql = "DROP TABLE IF EXISTS $table2";
 if ($conn->query($sql) === TRUE) {
-    echo "Tabla $table eliminada correctamente.<br>";
+    echo "Tabla $table2 eliminada correctamente.<br>";
 } else {
     echo "Error al eliminar la tabla: " . $conn->error . "<br>";
 }
@@ -37,16 +37,10 @@ echo "<br>";
 $sql = "CREATE TABLE $table2 (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     idPregunta INT UNSIGNED,
-    resposta1 VARCHAR(255),
-    resposta2 VARCHAR(255),
-    resposta3 VARCHAR(255),
-    resposta4 VARCHAR(255),
+    resposta VARCHAR(255),
     respCorrecta int,
-    imatge1 VARCHAR(255),
-    imatge2 VARCHAR(255),
-    imatge3 VARCHAR(255),
-    imatge4 VARCHAR(255),
-    CONSTRAINT fk_PreguntaResposta FOREIGN KEY (idPregunta) REFERENCES preguntes(id)
+    imatge VARCHAR(255),
+    CONSTRAINT fk_Pregunta2Resposta2 FOREIGN KEY (idPregunta) REFERENCES $table(id)
     )";
 if ($conn->query($sql) === TRUE) {
 echo "Table $table2 created successfully";
@@ -60,14 +54,12 @@ foreach ($arr["preguntes"] as $key => $value) {
     $stmt = $conn->prepare("INSERT INTO $table (enunciat) VALUES (?)");
     $stmt->bind_param("s",$value["pregunta"]);
     $stmt->execute();
-}
-
-foreach ($arr["preguntes"] as $key => $value) {
-    $stmt = $conn->prepare("INSERT INTO $table2 (idPregunta, resposta1, resposta2, resposta3, resposta4, respCorrecta, imatge1, imatge2, imatge3, imatge4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $key++;
-    $res = $value["respostes"];
-    $stmt->bind_param("issssissss",$key,$res[0]["etiqueta"],$res[1]["etiqueta"],$res[2]["etiqueta"],$res[3]["etiqueta"],$value["resposta_correcta"],$res[0]["imatge"],$res[1]["imatge"],$res[2]["imatge"],$res[3]["imatge"]);
-    $stmt->execute();
+    foreach ($value["respostes"] as $resp) {
+        $stmt = $conn->prepare("INSERT INTO $table2 (idPregunta, resposta, respCorrecta, imatge) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isis",$key,$resp["etiqueta"],$value["resposta_correcta"],$resp["imatge"]);
+        $stmt->execute();
+    }
 }
 
 $conn->close();
