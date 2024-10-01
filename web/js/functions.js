@@ -1,30 +1,30 @@
 let data;
 let numPreg = 10;
-let time=300;
-const estatDeLaPartida = 
-  {
-    contPregunta: 0,
-    preguntes: []
-  };
-  
-  fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/getPreguntes.php", {
-    method: "POST",
-    body: JSON.stringify(numPreg),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-.then(response => response.json())
-.then(dades => partida(dades));
+let time = 300;
+const estatDeLaPartida =
+{
+  contPregunta: 0,
+  preguntes: []
+};
 
-function partida(info){
+fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/getPreguntes.php", {
+  method: "POST",
+  body: JSON.stringify(numPreg),
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then(response => response.json())
+  .then(dades => partida(dades));
+
+function partida(info) {
   data = info;
 
   omplirPreguntes();
   imprimirPregunta();
 }
 
-function omplirPreguntes(){
+function omplirPreguntes() {
   for (let index = 0; index < data.preguntes.length; index++) {
     let pregunta = {
       id: index,
@@ -34,32 +34,36 @@ function omplirPreguntes(){
   }
 }
 
-function imprimirPregunta(){
+function imprimirPregunta() {
   const tauler = document.getElementById("partida");
   let strElement = '';
 
   strElement += `<p>${data.preguntes[estatDeLaPartida.contPregunta]}</p><br>`;
   strElement += `<div style="display:flex">`;
-  for (let i = 0; i < data.respostesP[estatDeLaPartida.contPregunta].length; i++) {
+  for (let i = 0; i < data.respostesP[estatDeLaPartida.contPregunta].etiqueta.length; i++) {
     strElement += `<div class="rtas">`;
-    strElement += `<button id="${i}" class="resposta">${data.respostesP[estatDeLaPartida.contPregunta][i].etiqueta}</button>`;
-    strElement += `<img src="${data.respostesP[estatDeLaPartida.contPregunta][i].imatge}" alt="image" width="100" height="150"><br>`;
+    strElement += `<button id="${i}" class="resposta">${data.respostesP[estatDeLaPartida.contPregunta].etiqueta[i]}</button>`;
+    strElement += `<img src="${data.respostesP[estatDeLaPartida.contPregunta].imatge[i]}" alt="image" width="100" height="150"><br>`;
     strElement += `</div>`;
   }
   strElement += `</div>`;
+  //puede que sacarlos fuera de la funcion
+  //añadir boton que te diga que opcion has clicado
+  //AÑADIRLOS EN EL PROPIO HTML
   strElement += `<button id="cancel" class="reset">Cancel·lar resposta</button>`;
   strElement += `<button class="anterior">Anterior</button>`;
   strElement += `<button class="seguent">Seguent</button>`;
-  strElement += `<button class="enviar">Enviar</button>`;
+  strElement += `<button class="enviar">Enviar</button><br>`;
+  strElement += `<button class="enviar">Opcio</button>`;
   tauler.innerHTML = strElement;
 
   const botones = tauler.querySelectorAll("button");
   botones.forEach(boto => {
     verificacions(boto);
-  }); 
+  });
 }
 
-function modificarPreguntes(idRespSel){
+function modificarPreguntes(idRespSel) {
   console.log(idRespSel);
   let pregunta = {
     id: estatDeLaPartida.contPregunta,
@@ -68,7 +72,7 @@ function modificarPreguntes(idRespSel){
   estatDeLaPartida.preguntes.splice(estatDeLaPartida.contPregunta, 1, pregunta);
 }
 
-function resetResposta(){
+function resetResposta() {
   let pregunta = {
     id: estatDeLaPartida.contPregunta,
     resposta: -1
@@ -85,7 +89,7 @@ function nextQuestion() {
   estatDeLaPartida.contPregunta++;
 }
 
-function enviarJSON(){
+function enviarJSON() {
   const formData = new FormData();
   formData.append("estatDeLaPartida", JSON.stringify(estatDeLaPartida));
   const tauler = document.getElementById("partida");
@@ -95,64 +99,66 @@ function enviarJSON(){
     method: "POST",
     body: formData,
   })
-  .then(res => {
-    if (!res.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return res.json()})
-  .then(response => {
-    console.log(response);
-    strElement += `Felicitats, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${numPreg}`;
-    strElement += `<br><br><br><br><button class="tornarAJugar">Tornar a jugar</button>`
-    tauler.innerHTML=strElement;
-  })
-  .catch(error => console.log("Error: ", error));
-  
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.json()
+    })
+    .then(response => {
+      console.log(response);
+      strElement += `Felicitats, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${numPreg}`;
+      strElement += `<br><br><br><br><button class="tornarAJugar">Tornar a jugar</button>`
+      tauler.innerHTML = strElement;
+    })
+    .catch(error => console.log("Error: ", error));
+
   clearInterval(interval);
 }
 
-function reiniciarPartida(){
-  window.location.reload();
+function reiniciarPartida() {
+
+  //window.location.reload();
 }
 
-function verificacions(boto){
-  if (boto.className==="anterior" && estatDeLaPartida.contPregunta==0) {
+function verificacions(boto) {
+  if (boto.className === "anterior" && estatDeLaPartida.contPregunta == 0) {
     boto.className = "notUsable";
   }
-  if (boto.className==="seguent" && estatDeLaPartida.contPregunta==data.preguntes.length-1) {
+  if (boto.className === "seguent" && estatDeLaPartida.contPregunta == data.preguntes.length - 1) {
     boto.className = "notUsable";
   }
-  if (boto.className==="enviar" && estatDeLaPartida.contPregunta!=data.preguntes.length-1) {
+  if (boto.className === "enviar" && estatDeLaPartida.contPregunta != data.preguntes.length - 1) {
     boto.className = "notUsable";
   }
-  if (boto.className==="reset" && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta==-1) {
+  if (boto.className === "reset" && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta == -1) {
     boto.className = "notUsable";
   }
-  if (boto.id === "cancel" && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta!=-1) {
+  if (boto.id === "cancel" && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta != -1) {
     boto.className = "reset";
   }
 }
 
 document.getElementById("partida").addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
-    if(event.target.className==="resposta"){
+    if (event.target.className === "resposta") {
       modificarPreguntes(event.target.id);
     }
-    if(event.target.className==="reset"){
+    if (event.target.className === "reset") {
       resetResposta();
     }
-    if(event.target.className==="seguent"){
+    if (event.target.className === "seguent") {
       nextQuestion();
     }
-    if(event.target.className==="anterior"){
+    if (event.target.className === "anterior") {
       lastQuestion();
     }
     imprimirPregunta();
   }
-  if(event.target.className==="enviar"){
+  if (event.target.className === "enviar") {
     enviarJSON();
   }
-  if(event.target.className==="tornarAJugar"){
+  if (event.target.className === "tornarAJugar") {
     reiniciarPartida();
   }
 });
@@ -160,13 +166,13 @@ document.getElementById("partida").addEventListener('click', (event) => {
 const timer = document.getElementById("timer");
 const interval = setInterval(() => stillPlaying(timer), 1000);
 
-function stillPlaying(place){
-  if (time>=0) {
-    place.innerHTML=time;
-    console.log(time);
+function stillPlaying(place) {
+  if (time >= 0) {
+    place.innerHTML = time;
+    //console.log(time);
     time--;
-  }else{
+  } else {
     enviarJSON();
-    place.innerHTML= `time out`; 
+    place.innerHTML = `time out`;
   }
 }

@@ -3,22 +3,22 @@ require_once("connexion.php");
 session_start();
 header('Content-Type: application/json');
 $numPreg = json_decode(file_get_contents('php://input'), true);
-$sql = "SELECT * FROM preguntes JOIN respostes ON respostes.idPregunta=preguntes.id";
+$sql = "SELECT preguntes.id, preguntes.enunciat, GROUP_CONCAT(respostes.resposta SEPARATOR ', ') AS respostes, GROUP_CONCAT(respostes.imatge SEPARATOR ', ') AS imatges, respostes.respCorrecta
+FROM preguntes
+JOIN respostes ON respostes.idPregunta = preguntes.id
+GROUP BY preguntes.id";
+
 $data = $conn->query($sql);
-$numAns=4;
 $arr = [];
 if ($data->num_rows > 0) {
     $i=0;
     while ($row = $data->fetch_assoc()){
         $arr[$i]["pregunta"]=$row["enunciat"];
         $arr[$i]["resposta_correcta"]=$row["respCorrecta"];
-        for ($j=0; $j < $numAns; $j++) { 
-            $arr[$i]["respostes"][$j]["etiqueta"]=$row["resposta". $j+1];
-            $arr[$i]["respostes"][$j]["imatge"]=$row["imatge". $j+1];
-        }
+        $arr[$i]["respostes"]["etiqueta"]=explode(",", $row["respostes"]);
+        $arr[$i]["respostes"]["imatge"]=explode(",", $row["imatges"]);
         $i++;
     }
-
 }
 
 for ($i = 0; $i < $numPreg; $i++) {
@@ -34,8 +34,10 @@ $_SESSION["pregunta"]->question = $question;
 $_SESSION["pregunta"]->answer = $answer;
 $_SESSION["pregunta"]->answers = $answers;
 
+
 $obj = new stdClass();
 $obj ->preguntes = $_SESSION["pregunta"]->question;
 $obj ->respostesP = $_SESSION["pregunta"]->answer;
+//$obj ->resp = $_SESSION["pregunta"]->answers;
 
 echo json_encode($obj);

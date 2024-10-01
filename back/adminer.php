@@ -23,8 +23,11 @@
 
 <body>
     <?php
-    require_once("connexion.php");
-    $sql = "SELECT * FROM preguntes JOIN respostes ON respostes.idPregunta=preguntes.id;";
+    require_once "connexion.php";
+    $sql = "SELECT preguntes.id, preguntes.enunciat, GROUP_CONCAT(respostes.resposta SEPARATOR ', ') AS respostes, GROUP_CONCAT(respostes.imatge SEPARATOR ', ') AS imatges, respostes.respCorrecta
+FROM preguntes
+JOIN respostes ON respostes.idPregunta = preguntes.id
+GROUP BY preguntes.id";
     $result = $conn->query($sql);
 
     echo '<div id="taulerContainer">';
@@ -35,17 +38,17 @@
                 <th>ID</th>
                 <th>Pregunta</th>
                 <th>Respostes</th>
-                <th>Resposta Correcta</th>
                 <th>Imatges</th>
+                <th>Resposta Correcta</th>
             </tr>
             <?php
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["id"] . "</td>";
                 echo "<td>" . $row["enunciat"] . "</td>";
-                echo "<td>" . $row["resposta1"]. ",". $row["resposta2"]. ",".$row["resposta3"]. ",". $row["resposta4"] . "</td>";
+                echo "<td>" . $row["respostes"]. "</td>";
+                echo "<td>" . $row["imatges"]. "</td>";
                 echo "<td>" . $row["respCorrecta"] . "</td>";
-                echo "<td>" . $row["imatge1"]. ",". $row["imatge2"]. ",".$row["imatge3"]. ",". $row["imatge4"] . "</td>";
                 echo "</tr>";
             }
             echo "</table>";
