@@ -1,22 +1,29 @@
 let data;
-let numPreg = 10;
 let time = 300;
+let interval;
 const estatDeLaPartida =
 {
   contPregunta: 0,
   preguntes: []
 };
 
-fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/getPreguntes.php", {
-  method: "POST",
-  body: JSON.stringify(numPreg),
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
+document.getElementById("pagina").className = "notUsable";
+
+function iniciar(){
+  document.getElementById("pagina").className = "pagina";
+  fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/getPreguntes.php", {
+    method: "POST",
+    body: JSON.stringify(localStorage.getItem("numPreguntes")),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
   .then(response => response.json())
   .then(dades => partida(dades));
-
+  const timer = document.getElementById("timer");
+  interval = setInterval(() => stillPlaying(timer), 1000);
+}
+  
 function partida(info) {
   data = info;
 
@@ -47,18 +54,11 @@ function imprimirPregunta() {
     strElement += `</div>`;
   }
   strElement += `</div>`;
-  //puede que sacarlos fuera de la funcion
-  //añadir boton que te diga que opcion has clicado
-  //AÑADIRLOS EN EL PROPIO HTML
-  strElement += `<button id="cancel" class="reset">Cancel·lar resposta</button>`;
-  strElement += `<button class="anterior">Anterior</button>`;
-  strElement += `<button class="seguent">Seguent</button>`;
-  strElement += `<button class="enviar">Enviar</button><br>`;
-  strElement += `<button class="enviar">Opcio</button>`;
   tauler.innerHTML = strElement;
 
-  const botones = tauler.querySelectorAll("button");
+  const botones = document.getElementById("botons").querySelectorAll("button");
   botones.forEach(boto => {
+    boto.className=boto.id;
     verificacions(boto);
   });
 }
@@ -70,6 +70,12 @@ function modificarPreguntes(idRespSel) {
     resposta: idRespSel
   };
   estatDeLaPartida.preguntes.splice(estatDeLaPartida.contPregunta, 1, pregunta);
+}
+
+function mostrarResposta(){
+  const tauler = document.getElementById("respostaSelec");
+  strElement = `<p>Opcio seleccionada: ${data.respostesP[estatDeLaPartida.contPregunta].etiqueta[estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta]}</p>`;
+  tauler.innerHTML = strElement;
 }
 
 function resetResposta() {
@@ -87,6 +93,13 @@ function lastQuestion() {
 
 function nextQuestion() {
   estatDeLaPartida.contPregunta++;
+}
+
+function ocultarBotons(){
+  const botones = document.getElementById("botons").querySelectorAll("button");
+  botones.forEach(boto => {
+    boto.className="notUsable";
+  });
 }
 
 function enviarJSON() {
@@ -107,18 +120,18 @@ function enviarJSON() {
     })
     .then(response => {
       console.log(response);
-      strElement += `Felicitats, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${numPreg}`;
+      strElement += `Felicitats, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${localStorage.getItem("numPreguntes")}`;
       strElement += `<br><br><br><br><button class="tornarAJugar">Tornar a jugar</button>`
       tauler.innerHTML = strElement;
     })
     .catch(error => console.log("Error: ", error));
-
-  clearInterval(interval);
 }
 
 function reiniciarPartida() {
-
-  //window.location.reload();
+  estatDeLaPartida.contPregunta=0;
+  estatDeLaPartida.preguntes=[];
+  time=30;
+  iniciar();
 }
 
 function verificacions(boto) {
@@ -131,15 +144,12 @@ function verificacions(boto) {
   if (boto.className === "enviar" && estatDeLaPartida.contPregunta != data.preguntes.length - 1) {
     boto.className = "notUsable";
   }
-  if (boto.className === "reset" && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta == -1) {
+  if ((boto.className === "reset" || boto.className === "respostaSelec") && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta == -1) {
     boto.className = "notUsable";
-  }
-  if (boto.id === "cancel" && estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta != -1) {
-    boto.className = "reset";
   }
 }
 
-document.getElementById("partida").addEventListener('click', (event) => {
+document.getElementById("pagina").addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
     if (event.target.className === "resposta") {
       modificarPreguntes(event.target.id);
@@ -153,26 +163,47 @@ document.getElementById("partida").addEventListener('click', (event) => {
     if (event.target.className === "anterior") {
       lastQuestion();
     }
+    mostrarResposta();
     imprimirPregunta();
   }
   if (event.target.className === "enviar") {
+    ocultarBotons();
     enviarJSON();
+    clearInterval(interval);
   }
   if (event.target.className === "tornarAJugar") {
     reiniciarPartida();
   }
 });
 
-const timer = document.getElementById("timer");
-const interval = setInterval(() => stillPlaying(timer), 1000);
+/*document.getElementById("inici").addEventListener('click', (event) => {
+  if (event.target.tagName === 'BUTTON') {
+    if (event.target.className === "iniciar") {
+      event.target.className = "notUsable";
+      iniciar();
+    }
+  }
+});*/
+
+document.getElementById("inici").addEventListener('click', (event) => {
+  const nomU = document.getElementById("nom").value.trim();
+  const numP = document.getElementById("nPreg").value.trim();
+  localStorage.setItem("nomUsuari", nomU);
+  localStorage.setItem("numPreguntes", numP);
+
+  if (localStorage.getItem("nomUsuari") && localStorage.getItem("numPreguntes")) {
+    document.getElementById("inici").className = "notUsable";
+    iniciar();
+  }
+});
 
 function stillPlaying(place) {
   if (time >= 0) {
     place.innerHTML = time;
-    //console.log(time);
     time--;
   } else {
     enviarJSON();
+    clearInterval(interval);
     place.innerHTML = `time out`;
   }
 }

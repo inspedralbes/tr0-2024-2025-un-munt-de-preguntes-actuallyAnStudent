@@ -1,5 +1,5 @@
 <?php
-$dbhost = 'localdbhost';
+$dbhost = 'localhost';
 $dbuser = 'quizz';
 $dbpas = '1234';
 $dbdb = 'quizz';

@@ -1,13 +1,15 @@
 .notUsable {
     display: none;
   }
-
 .rtas{
   display: flex;
   flex-direction: column;
   width: fit-content;
 }
-
 img, button{
   margin-right: 10px;
+}
+.respostaSelec{
+  background: none;
+  border: none;
 }
