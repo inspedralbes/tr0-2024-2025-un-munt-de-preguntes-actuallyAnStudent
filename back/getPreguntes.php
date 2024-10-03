@@ -2,7 +2,7 @@
 require_once("connexion.php");
 session_start();
 header('Content-Type: application/json');
-$numPreg = json_decode(file_get_contents('php://input'), true);
+$numPreg = json_decode(file_get_contents('php://input'), true)["num"];
 $sql = "SELECT preguntes.id, preguntes.enunciat, GROUP_CONCAT(respostes.resposta SEPARATOR ', ') AS respostes, GROUP_CONCAT(respostes.imatge SEPARATOR ', ') AS imatges, respostes.respCorrecta
 FROM preguntes
 JOIN respostes ON respostes.idPregunta = preguntes.id

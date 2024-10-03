@@ -1,0 +1,12 @@
+body{
+  display: flex;
+  flex-direction: column;
+}
+table,td,th {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+#taulerContainer{
+  display: flex;
+  flex-direction: row;
+}

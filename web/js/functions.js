@@ -11,7 +11,7 @@ function iniciar(){
   document.getElementById("pagina").className = "pagina";
   fetch("../back/getPreguntes.php", {
     method: "POST",
-    body: JSON.stringify(localStorage.getItem("numPreguntes")),
+    body: JSON.stringify({num: localStorage.getItem("numPreguntes")}),//aqui quieren esto? JSON.stringify({localStorage.getItem("numPreguntes")})
     headers: {
       "Content-Type": "application/json",
     },
@@ -147,43 +147,53 @@ function verificacions(boto) {
   }
 }
 
-document.getElementById("pagina").addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-    if (event.target.className === "resposta") {
-      modificarPreguntes(event.target.id);
+function creacioListener(){
+  document.getElementById("pagina").addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+      if (event.target.className === "resposta") {
+        modificarPreguntes(event.target.id);
+      }
+      if (event.target.className === "reset") {
+        resetResposta();
+      }
+      if (event.target.className === "seguent") {
+        nextQuestion();
+      }
+      if (event.target.className === "anterior") {
+        lastQuestion();
+      }
+      mostrarResposta();
+      imprimirPregunta();
     }
-    if (event.target.className === "reset") {
-      resetResposta();
+    if (event.target.className === "enviar") {
+      ocultarBotons();
+      enviarJSON();
+      clearInterval(interval);
     }
-    if (event.target.className === "seguent") {
-      nextQuestion();
+    if (event.target.className === "tornarAJugar") {
+      reiniciarPartida();
     }
-    if (event.target.className === "anterior") {
-      lastQuestion();
-    }
-    mostrarResposta();
-    imprimirPregunta();
-  }
-  if (event.target.className === "enviar") {
-    ocultarBotons();
-    enviarJSON();
-    clearInterval(interval);
-  }
-  if (event.target.className === "tornarAJugar") {
-    reiniciarPartida();
-  }
-});
+  });
 
-document.getElementById("inici").addEventListener('click', (event) => {
-  const nomU = document.getElementById("nom").value.trim();
-  const numP = document.getElementById("nPreg").value.trim();
-  localStorage.setItem("nomUsuari", nomU);
-  localStorage.setItem("numPreguntes", numP);
+  document.getElementById("inici").addEventListener('click', (event) => {
+    if (event.target.className === "iniciar") { 
+      const nomU = document.getElementById("nom").value.trim();
+      const numP = document.getElementById("nPreg").value.trim();
+      localStorage.setItem("nomUsuari", nomU);
+      localStorage.setItem("numPreguntes", numP);
+      
+      if (localStorage.getItem("nomUsuari") && localStorage.getItem("numPreguntes")) {
+        document.getElementById("inici").className = "notUsable";
+        iniciar();
+      }
+    }else if (event.target.className === "adminer") {
+      window.location.href = './adminer.html';
+    }
+  });
+}
 
-  if (localStorage.getItem("nomUsuari") && localStorage.getItem("numPreguntes")) {
-    document.getElementById("inici").className = "notUsable";
-    iniciar();
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  creacioListener();
 });
 
 function stillPlaying(place) {
