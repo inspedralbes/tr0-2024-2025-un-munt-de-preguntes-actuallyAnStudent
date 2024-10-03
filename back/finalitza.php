@@ -3,15 +3,24 @@ session_start();
 
 $arr = json_decode($_POST['estatDeLaPartida'], true);
 $obj = array(
-    "respostesCorrectes" => calcularRespCorr($arr),
+    "respostesCorrectes" => 0,
     "respostesIncorrectes" => calcularRespIncorr($arr),
-    "respostesTotal" => count($arr["preguntes"])
+    "respostesTotal" => count($arr["preguntes"]),
+    "peticio" => $arr,
+    "debug" => array()
 );
-
-function calcularRespCorr($dades){
+$obj["respostesCorrectes"] = calcularRespCorr($arr,$obj["debug"]);
+function calcularRespCorr($dades, &$debug){
     $quantitat=0;
     foreach ($dades["preguntes"] as $key => $value) {
+        $tmp = new stdClass;
+        $tmp->val1 = $_SESSION["pregunta"]->answers[$key];
+        $tmp->val2 =$value["resposta"]+1;
+        $tmp->comp = $_SESSION["pregunta"]->answers[$key]==$value["resposta"]+1;
+
+        $debug[] = $tmp;
         if ($_SESSION["pregunta"]->answers[$key]==$value["resposta"]+1) {
+
             $quantitat++;
         }
     }

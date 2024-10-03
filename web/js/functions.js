@@ -1,5 +1,5 @@
 let data;
-let time = 300;
+let time = 30;
 let interval;
 const estatDeLaPartida =
 {
@@ -11,7 +11,7 @@ document.getElementById("pagina").className = "notUsable";
 
 function iniciar(){
   document.getElementById("pagina").className = "pagina";
-  fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/getPreguntes.php", {
+  fetch("../back/getPreguntes.php", {
     method: "POST",
     body: JSON.stringify(localStorage.getItem("numPreguntes")),
     headers: {
@@ -108,7 +108,7 @@ function enviarJSON() {
   const tauler = document.getElementById("partida");
   let strElement = "";
 
-  fetch("http://localhost/tr0-2024-2025-un-munt-de-preguntes-actuallyAnStudent/back/finalitza.php", {
+  fetch("../back/finalitza.php", {
     method: "POST",
     body: formData,
   })
@@ -120,7 +120,7 @@ function enviarJSON() {
     })
     .then(response => {
       console.log(response);
-      strElement += `Felicitats, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${localStorage.getItem("numPreguntes")}`;
+      strElement += `Felicitats ${localStorage.getItem("nomUsuari")}, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${data.preguntes.length}`;
       strElement += `<br><br><br><br><button class="tornarAJugar">Tornar a jugar</button>`
       tauler.innerHTML = strElement;
     })
