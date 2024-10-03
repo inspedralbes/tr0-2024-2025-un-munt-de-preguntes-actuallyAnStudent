@@ -6,19 +6,19 @@ $obj = array(
     "respostesCorrectes" => 0,
     "respostesIncorrectes" => calcularRespIncorr($arr),
     "respostesTotal" => count($arr["preguntes"]),
-    "peticio" => $arr,
-    "debug" => array()
+    //"peticio" => $arr,
+    //"debug" => array()
 );
-$obj["respostesCorrectes"] = calcularRespCorr($arr,$obj["debug"]);
-function calcularRespCorr($dades, &$debug){
+$obj["respostesCorrectes"] = calcularRespCorr($arr);
+function calcularRespCorr($dades){
     $quantitat=0;
     foreach ($dades["preguntes"] as $key => $value) {
-        $tmp = new stdClass;
+        /*$tmp = new stdClass;
         $tmp->val1 = $_SESSION["pregunta"]->answers[$key];
         $tmp->val2 =$value["resposta"]+1;
-        $tmp->comp = $_SESSION["pregunta"]->answers[$key]==$value["resposta"]+1;
+        $tmp->comp = $_SESSION["pregunta"]->answers[$key]==$value["resposta"]+1;*/
 
-        $debug[] = $tmp;
+        //$debug[] = $tmp;
         if ($_SESSION["pregunta"]->answers[$key]==$value["resposta"]+1) {
 
             $quantitat++;

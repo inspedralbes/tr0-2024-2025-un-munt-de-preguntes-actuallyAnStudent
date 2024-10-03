@@ -49,3 +49,4 @@ $obj ->respostesP = $_SESSION["pregunta"]->answer;
 //$obj ->resp = $_SESSION["pregunta"]->answers;
 
 echo json_encode($obj);
+$conn->close();

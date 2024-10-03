@@ -7,8 +7,6 @@ const estatDeLaPartida =
   preguntes: []
 };
 
-document.getElementById("pagina").className = "notUsable";
-
 function iniciar(){
   document.getElementById("pagina").className = "pagina";
   fetch("../back/getPreguntes.php", {
@@ -176,15 +174,6 @@ document.getElementById("pagina").addEventListener('click', (event) => {
   }
 });
 
-/*document.getElementById("inici").addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-    if (event.target.className === "iniciar") {
-      event.target.className = "notUsable";
-      iniciar();
-    }
-  }
-});*/
-
 document.getElementById("inici").addEventListener('click', (event) => {
   const nomU = document.getElementById("nom").value.trim();
   const numP = document.getElementById("nPreg").value.trim();
@@ -199,9 +188,13 @@ document.getElementById("inici").addEventListener('click', (event) => {
 
 function stillPlaying(place) {
   if (time >= 0) {
+    if (time<10) {
+      place.style.color='red';
+    }
     place.innerHTML = time;
     time--;
   } else {
+    ocultarBotons();
     enviarJSON();
     clearInterval(interval);
     place.innerHTML = `time out`;
