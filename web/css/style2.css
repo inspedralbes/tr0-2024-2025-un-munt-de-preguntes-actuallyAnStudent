@@ -10,3 +10,61 @@ table,td,th {
   display: flex;
   flex-direction: row;
 }
+.notUsable {
+  display: none;
+}
+
+/*A partir de aqui hay que cambiar todo el css*/
+body {
+  font-family: Arial, sans-serif; /* Fuente general */
+  margin: 0; /* Elimina margen por defecto */
+  padding: 0; /* Elimina padding por defecto */
+  background-color: #f4f4f4; /* Color de fondo */
+}
+
+#miContenedor {
+  max-width: 600px; /* Ancho máximo del contenedor */
+  margin: 50px auto; /* Centra el contenedor vertical y horizontalmente */
+  padding: 20px; /* Padding interno */
+  background-color: #fff; /* Fondo blanco */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilos para el título */
+h1 {
+  text-align: center; /* Centra el texto */
+  color: #333; /* Color del texto */
+}
+
+/* Estilos para los inputs */
+input[type="text"] {
+  width: 100%; /* Ancho completo */
+  padding: 10px; /* Espacio interno */
+  margin: 10px 0; /* Margen arriba y abajo */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilos para el botón */
+button {
+  width: 100%; /* Ancho completo */
+  padding: 10px; /* Espacio interno */
+  background-color: #007bff; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+/* Estilo para el botón al pasar el mouse */
+button:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilo para el botón al hacer clic */
+button:active {
+  background-color: #004085; /* Color de fondo al hacer clic */
+}

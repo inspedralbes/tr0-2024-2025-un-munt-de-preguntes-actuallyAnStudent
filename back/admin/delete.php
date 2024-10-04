@@ -18,5 +18,5 @@ $stmt -> execute();
 $obj->res2 = $stmt->affected_rows;
 $obj->con2 = $consulta;
 
-echo json_encode($obj);//informacion que no tendria porque recibir
+echo json_encode($obj);//informacion extra sobre la respuesta de la query
 $conn -> close();

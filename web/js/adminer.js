@@ -1,4 +1,44 @@
-let dades;
+document.addEventListener('DOMContentLoaded', () => {
+    start();
+    crearListener();
+});
+
+function crearListener(){
+    document.getElementById("bodyTaula").addEventListener('click', (event)=>{
+        const fila = event.target.closest('tr');
+
+        if(event.target.className === "eliminar"){
+            confirmacioEliminacio(fila);
+        }else if (event.target.className === "editar") {
+            peticioUpdate(fila.id);
+        }
+    });
+
+    document.getElementById("crear").addEventListener('click', (event) => {
+        document.getElementById("divInsert").className="divInsert";
+    });
+
+    document.getElementById("insert").addEventListener('click', (event) => {
+        const dadesP = {
+            enunciat: document.getElementById("enunciatPregunta").value.trim(),
+            respCorrecta: document.getElementById("respostaCorrecta").value.trim(),
+            imatge: [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s"
+            ],
+            resposta: [
+                document.getElementById("resposta1").value.trim(),
+                document.getElementById("resposta2").value.trim(),
+                document.getElementById("resposta3").value.trim(),
+                document.getElementById("resposta4").value.trim()
+            ]
+        }
+
+        peticioCrear(dadesP);
+    });
+}
 
 function start(){
     fetch("../back/admin/getPreguntes.php")
@@ -7,7 +47,6 @@ function start(){
 }
 
 function imprimir(data){
-    dades=data;
     imprimirHeader();
     imprimirBody(data);
 }
@@ -36,19 +75,71 @@ function imprimirBody(d){
         strElement += `<td>${d.respostes[index]}</td>`;
         strElement += `<td>${d.imatgesR[index]}</td>`;
         strElement += `<td>${d.respostesC[index]}</td>`;
-        strElement += `<td><button id="eliminar">Eliminar</button><button id="editar">Editar</button></td>`;
+        strElement += `<td><button class="eliminar">Eliminar</button><button class="editar">Editar</button></td>`;
         strElement += `</tr>`
     }
     body.innerHTML= strElement;
 }
 
-function actualitzarTaula(id){
+function eliminarFilera(id){
     const tr = document.getElementById(id);
-
+    
     if (tr) {
         tr.remove();
-        Swal.fire("SweetAlert2 is working!");
+        Swal.fire({
+            text: "Pregunta eliminada correctament",
+            icon: "success"
+        });
     }
+}
+
+function confirmacioEliminacio(fila){
+    Swal.fire({
+        icon: "warning",
+        title: "Vols eliminar la pregunta?",
+        showDenyButton: true,
+        confirmButtonText: "Si",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            peticioEliminar(fila.id);
+        } else if (result.isDenied) {
+            Swal.fire("Pregunta no eliminada");
+        }
+    });
+}
+
+function omplirFilera(tr, dades){
+    const values = [tr["id"],dades["enunciat"],dades["resposta"],dades["imatge"],dades["respCorrecta"]];
+
+    for (let i = 0; i < 5; i++) {
+        const td = document.createElement("td");
+        td.textContent = values[i];
+        tr.appendChild(td);
+    }
+    const td = document.createElement("td");
+
+    const btnEliminar = document.createElement("button");
+    btnEliminar.className = "eliminar";
+    btnEliminar.textContent = "Eliminar";
+
+    const btnEditar = document.createElement("button");
+    btnEditar.className = "editar";
+    btnEditar.textContent = "Editar";
+    td.appendChild(btnEliminar);
+    td.appendChild(btnEditar);
+    tr.appendChild(td);
+}
+
+function afegirFilera(d, obj){
+    const body = document.getElementById("bodyTaula");
+    const tr = body.appendChild(document.createElement("tr"));
+    tr.id = d["id"];
+    omplirFilera(tr,obj);
+    document.getElementById("divInsert").className="notUsable";
+    Swal.fire({
+        title: "Pregunta creada!",
+        icon: "success"
+      });
 }
 
 function peticioEliminar(idTr){
@@ -59,33 +150,18 @@ function peticioEliminar(idTr){
             "Content-Type": "application/json",
         },
     })
-    .then(response => response.json())//estas dos no hacen falta ni hacen nada ahora
-    .then(data => actualitzarTaula(idTr));
+    .then(response => response.json())
+    .then(data => eliminarFilera(idTr));
 }
 
-function peticioCrear(){
-    
+function peticioCrear(obj){
+    fetch("../back/admin/insert.php", {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then(response => response.json())
+    .then(data => afegirFilera(data,obj));
 }
-
-function crearListener(){
-    document.getElementById("bodyTaula").addEventListener('click', (event)=>{
-        const fila = event.target.closest('tr');
-
-        if(event.target.id === "eliminar"){
-            peticioEliminar(fila.id);
-        }else if (event.target.id === "editar") {
-            peticioUpdate(fila.id);
-        }
-    });
-
-    document.getElementById("crear").addEventListener('click', (event) => {
-        if(event.target.id === "crear"){
-            peticioCrear();
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    start();
-    crearListener();
-});

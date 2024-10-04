@@ -24,7 +24,7 @@ if ($conn->query($sql) === TRUE) {
 //creant les taules
 $sql = "CREATE TABLE $table (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        enunciat VARCHAR(255)
+        enunciat VARCHAR(255) UNIQUE
         )";
 if ($conn->query($sql) === TRUE) {
     echo "Table $table created successfully";

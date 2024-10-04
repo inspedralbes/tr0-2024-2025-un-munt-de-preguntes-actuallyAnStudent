@@ -11,7 +11,7 @@ function iniciar(){
   document.getElementById("pagina").className = "pagina";
   fetch("../back/getPreguntes.php", {
     method: "POST",
-    body: JSON.stringify({num: localStorage.getItem("numPreguntes")}),//aqui quieren esto? JSON.stringify({localStorage.getItem("numPreguntes")})
+    body: JSON.stringify({num: localStorage.getItem("numPreguntes")}),
     headers: {
       "Content-Type": "application/json",
     },

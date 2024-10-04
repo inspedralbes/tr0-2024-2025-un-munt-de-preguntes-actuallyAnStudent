@@ -14,13 +14,6 @@ $data = $conn->query($sql);
 $arr = [];
 if ($data->num_rows > 0) {
     $i=0;
-    /*while ($row = $data->fetch_assoc()) {
-        $arr[$i]["pregunta"]=$row["enunciat"];
-        $arr[$i]["resposta_correcta"]=$row["respCorrecta"];
-        $arr[$i]["respostes"]["etiqueta"]=explode(",", $row["respostes"]);
-        $arr[$i]["respostes"]["imatge"]=explode(",", $row["imatges"]);
-        $i++;
-    }*/
     while ($row = $data->fetch_assoc()) {
         $question[$i]=$row["enunciat"];
         $answers[$i]=$row["respCorrecta"];
@@ -29,13 +22,6 @@ if ($data->num_rows > 0) {
         $i++;
     }
 }
-/*for ($i = 0; $i < $numPreg; $i++) {
-    $pos = rand(0, count($arr) - 1);
-    $question[] = $arr[$pos]["pregunta"];
-    $answers[] = $arr[$pos]["resposta_correcta"];
-    $answer[] = $arr[$pos]["respostes"];
-    array_splice($arr, $pos, 1);
-}*/
 
 $_SESSION["pregunta"] = new stdClass();
 $_SESSION["pregunta"]->question = $question;
