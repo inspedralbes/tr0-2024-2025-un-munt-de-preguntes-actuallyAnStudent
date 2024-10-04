@@ -1,5 +1,5 @@
 <?php
-require_once("connexion.php");
+require_once "connexion.php";
 session_start();
 header('Content-Type: application/json');
 $numPreg = json_decode(file_get_contents('php://input'), true)["num"];
