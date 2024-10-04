@@ -75,7 +75,7 @@
         { "id": 3, "etiqueta": "Honda", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 4, "etiqueta": "Mazda", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" }
       ],
-      "resposta_correcta": 1
+      "resposta_correcta": 3
     },
     {
       "id": 8,
@@ -86,7 +86,7 @@
         { "id": 3, "etiqueta": "Milka", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 4, "etiqueta": "Cadbury", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" }
       ],
-      "resposta_correcta": 1
+      "resposta_correcta": 3
     },
     {
       "id": 9,
@@ -101,14 +101,14 @@
     },
     {
       "id": 10,
-      "pregunta": "Quina marca de productes de neteja és coneguda pel seu logo de gat?",
+      "pregunta": "Quina marca de productes és coneguda pel seu logo de gat?",
       "respostes": [
         { "id": 1, "etiqueta": "Tide", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 2, "etiqueta": "P&G", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 3, "etiqueta": "Persil", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 4, "etiqueta": "Cat's Best", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" }
       ],
-      "resposta_correcta": 3
+      "resposta_correcta": 4
     },
     {
       "id": 11,
@@ -123,14 +123,14 @@
     },
     {
       "id": 12,
-      "pregunta": "Quina marca de begudes energètiques és coneguda pel seu logo verd i blau?",
+      "pregunta": "Quina marca de begudes energètiques és coneguda pel seu logo amb dos bous?",
       "respostes": [
         { "id": 1, "etiqueta": "Red Bull", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 2, "etiqueta": "Monster", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 3, "etiqueta": "Rockstar", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" },
         { "id": 4, "etiqueta": "Amp Energy", "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s" }
       ],
-      "resposta_correcta": 2
+      "resposta_correcta": 1
     },
     {
       "id": 13,

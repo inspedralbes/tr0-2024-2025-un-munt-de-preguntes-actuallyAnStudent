@@ -47,7 +47,7 @@ function imprimirPregunta() {
   strElement += `<div style="display:flex">`;
   for (let i = 0; i < data.respostesP[estatDeLaPartida.contPregunta].etiqueta.length; i++) {
     strElement += `<div class="rtas">`;
-    strElement += `<button class="resposta">${data.respostesP[estatDeLaPartida.contPregunta].etiqueta[i]}</button>`;
+    strElement += `<button id="${i}" class="resposta">${data.respostesP[estatDeLaPartida.contPregunta].etiqueta[i]}</button>`;
     strElement += `<img src="${data.respostesP[estatDeLaPartida.contPregunta].imatge[i]}" alt="image" width="100" height="150"><br>`;
     strElement += `</div>`;
   }
@@ -151,6 +151,7 @@ function creacioListener(){
   document.getElementById("pagina").addEventListener('click', (event) => {
     if (event.target.tagName === 'BUTTON') {
       if (event.target.className === "resposta") {
+        console.log(event.target.id);
         modificarPreguntes(event.target.id);
       }
       if (event.target.className === "reset") {
