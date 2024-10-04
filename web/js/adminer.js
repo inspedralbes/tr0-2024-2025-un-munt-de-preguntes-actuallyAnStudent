@@ -36,32 +36,45 @@ function imprimirBody(d){
         strElement += `<td>${d.respostes[index]}</td>`;
         strElement += `<td>${d.imatgesR[index]}</td>`;
         strElement += `<td>${d.respostesC[index]}</td>`;
-        strElement += `<td><button id=${d.id[index]} class="eliminar">Eliminar</button><button id=${d.id[index]} class="editar">Editar</button></td>`;
+        strElement += `<td><button id="eliminar">Eliminar</button><button id="editar">Editar</button></td>`;
         strElement += `</tr>`
     }
     body.innerHTML= strElement;
 }
 
-function peticioEliminar(idPre){
+function actualitzarTaula(id){
+    const tr = document.getElementById(id);
+
+    if (tr) {
+        tr.remove();
+        Swal.fire("SweetAlert2 is working!");
+    }
+}
+
+function peticioEliminar(idTr){
     fetch("../back/admin/delete.php", {
         method: "POST",
-        body: JSON.stringify({idPre}),
+        body: JSON.stringify({idTr}),
         headers: {
             "Content-Type": "application/json",
         },
     })
     .then(response => response.json())//estas dos no hacen falta ni hacen nada ahora
-    .then(data => confirmacioEliminacio(data));//no declarada, podria mostrar la query realizada
+    .then(data => actualitzarTaula(idTr));
+}
+
+function peticioCrear(){
+    
 }
 
 function crearListener(){
     document.getElementById("bodyTaula").addEventListener('click', (event)=>{
-        let id=event.target.id;
+        const fila = event.target.closest('tr');
 
-        if(event.target.className === "eliminar"){
-            peticioEliminar(id);
-        }else if (event.target.className === "editar") {
-            peticioUpdate(id);
+        if(event.target.id === "eliminar"){
+            peticioEliminar(fila.id);
+        }else if (event.target.id === "editar") {
+            peticioUpdate(fila.id);
         }
     });
 

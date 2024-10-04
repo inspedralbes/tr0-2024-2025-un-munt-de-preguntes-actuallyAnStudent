@@ -1,34 +1,7 @@
-.notUsable {
-    display: none;
-  }
-.rtas{
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-}
-img, button{
-  margin-right: 10px;
-}
-.respostaSelec{
-  background: none;
-  border: none;
-}
-
-.enviar{
-  background-color: yellow;
-}
-
-.inici {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
+/* Estilos globales */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
   display: flex;
@@ -37,37 +10,151 @@ body {
   height: 100vh;
 }
 
-h1 {
+/* Estilos para el contenedor de inicio */
+#inici {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: #333;
+  max-width: 400px;
+  width: 100%;
 }
 
-.inici input {
+/* Ocultar la página hasta que se active */
+.notUsable {
+  display: none;
+}
+
+.pagina {
+  display: block;
+}
+
+/* Estilo para los inputs */
+input[type="text"],
+input[type="number"] {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  border: 1px solid #ccc;
   font-size: 16px;
 }
 
-.iniciar, .adminer {
-  background-color: #28a745;
-  color: white;
+/* Estilo para los botones */
+button {
   padding: 10px 20px;
+  margin: 10px 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
-.iniciar:hover, .adminer:hover {
+button:hover {
+  background-color: #0056b3;
+}
+
+.iniciar {
+  background-color: #28a745;
+}
+
+.iniciar:hover {
   background-color: #218838;
 }
 
+.adminer {
+  background-color: #6c757d;
+}
+
+.adminer:hover {
+  background-color: #5a6268;
+}
+
+/* Botones de la página del cuestionario */
+#botons button {
+  margin-top: 10px;
+}
+
+#reset {
+  background-color: #ff5722;
+}
+
+#reset:hover {
+  background-color: #e64a19;
+}
+
+#anterior,
+#seguent {
+  background-color: #007bff;
+}
+
+#anterior:hover,
+#seguent:hover {
+  background-color: #0056b3;
+}
+
+#enviar {
+  background-color: #28a745;
+}
+
+#enviar:hover {
+  background-color: #218838;
+}
+
+#respostaSelec {
+  background-color: #ffc107;
+  cursor: default;
+}
+
+/* Estilo para el temporizador */
 #timer {
-  font-size: 24px;
-  color: #2e8826;
-  font-weight: bold;
+  font-size: 3em;
   text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilo para el contenedor de la partida */
+#partida {
+  margin: 20px 0;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los botones de respuestas */
+.rtas {
+  display: inline-block;
+  margin: 10px;
+}
+
+.resposta {
+  display: block;
+  background-color: #17a2b8;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.resposta:hover {
+  background-color: #138496;
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 600px) {
+  #inici, #pagina {
+      width: 90%;
+  }
+
+  button {
+      width: 100%;
+      margin: 5px 0;
+  }
 }

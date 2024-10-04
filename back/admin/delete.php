@@ -1,7 +1,7 @@
 <?php
 require_once "../connexion.php";
 header('Content-Type: application/json');
-$id = json_decode(file_get_contents('php://input'), true)["idPre"];
+$id = json_decode(file_get_contents('php://input'), true)["idTr"];
 $obj = new stdClass();
 
 $consulta= "DELETE FROM respostes WHERE respostes.idPregunta=?";
@@ -10,6 +10,7 @@ $stmt ->bind_param("i", $id);
 $stmt -> execute();
 $obj->res1 = $stmt->affected_rows;
 $obj->con1 = $consulta;
+
 $consulta= "DELETE FROM preguntes WHERE preguntes.id=?";
 $stmt = $conn ->prepare($consulta);
 $stmt ->bind_param("i", $id);
