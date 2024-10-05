@@ -24,7 +24,7 @@ if ($conn->query($sql) === TRUE) {
 //creant les taules
 $sql = "CREATE TABLE $table (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        enunciat VARCHAR(255) UNIQUE
+        enunciat VARCHAR(255) UNIQUE  NOT NULL
         )";
 if ($conn->query($sql) === TRUE) {
     echo "Table $table created successfully";
@@ -36,10 +36,10 @@ echo "<br>";
 
 $sql = "CREATE TABLE $table2 (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    idPregunta INT UNSIGNED,
-    resposta VARCHAR(255),
-    respCorrecta int,
-    imatge VARCHAR(255),
+    idPregunta INT UNSIGNED NOT NULL,
+    resposta VARCHAR(255) NOT NULL,
+    respCorrecta int NOT NULL,
+    imatge VARCHAR(255) NOT NULL,
     CONSTRAINT fk_PreguntaResposta FOREIGN KEY (idPregunta) REFERENCES $table(id)
     )";
 if ($conn->query($sql) === TRUE) {

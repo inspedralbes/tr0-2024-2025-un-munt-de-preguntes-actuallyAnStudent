@@ -3,19 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
     crearListener();
 });
 
-function crearListener(){
-    document.getElementById("bodyTaula").addEventListener('click', (event)=>{
+function crearListener() {
+    document.getElementById("bodyTaula").addEventListener('click', (event) => {
         const fila = event.target.closest('tr');
 
-        if(event.target.className === "eliminar"){
-            confirmacioEliminacio(fila);
-        }else if (event.target.className === "editar") {
+        if (event.target.className === "eliminar") {
+            confirmacioEliminacio(fila.id);
+        } else if (event.target.className === "editar") {
+            carregarNovesDades(fila.id);
+            event.target.className = "guardar";
+            event.target.textContent = "Guardar";
+        } else if (event.target.className === "guardar") {
             peticioUpdate(fila.id);
+            event.target.className = "editar";
+            event.target.textContent = "Editar";
         }
     });
 
     document.getElementById("crear").addEventListener('click', (event) => {
-        document.getElementById("divInsert").className="divInsert";
+        document.getElementById("divInsert").className = "divInsert";
     });
 
     document.getElementById("insert").addEventListener('click', (event) => {
@@ -35,24 +41,37 @@ function crearListener(){
                 document.getElementById("resposta4").value.trim()
             ]
         }
-
-        peticioCrear(dadesP);
+        if (dadesP["enunciat"] && dadesP["respCorrecta"] && dadesP["resposta"][0] && dadesP["resposta"][1] && dadesP["resposta"][2] && dadesP["resposta"][3]) {
+            peticioCrear(dadesP);
+        } else {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+            Toast.fire({
+                icon: "warning",
+                title: "Tots els camps son obligatoris"
+            });
+        }
     });
 }
 
-function start(){
+function start() {
     fetch("../back/admin/getPreguntes.php")
-    .then(response => response.json())
-    .then(dades => imprimir(dades));
+        .then(response => response.json())
+        .then(data => imprimir(data));
 }
 
-function imprimir(data){
+function imprimir(data) {
     imprimirHeader();
     imprimirBody(data);
 }
 
-function imprimirHeader(){
-    const header=document.getElementById("headerTaula");
+function imprimirHeader() {
+    const header = document.getElementById("headerTaula");
     let strElement = "";
     strElement += `<tr>`
     strElement += `<th>ID</th>`;
@@ -65,35 +84,50 @@ function imprimirHeader(){
     header.innerHTML = strElement;
 }
 
-function imprimirBody(d){
-    const body=document.getElementById("bodyTaula");
+function imprimirBody(d) {
+    const body = document.getElementById("bodyTaula");
     let strElement = "";
     for (let index = 0; index < d.id.length; index++) {
-        strElement += `<tr id=${d.id[index]}>`
+        strElement += `<tr id="pregunta_${d.id[index]}">`
         strElement += `<td>${d.id[index]}</td>`;
         strElement += `<td>${d.preguntes[index]}</td>`;
-        strElement += `<td>${d.respostes[index]}</td>`;
-        strElement += `<td>${d.imatgesR[index]}</td>`;
+        strElement += `<td>`;
+        for (let it = 0; it < d.respostes[index].length; it++) {
+            strElement += `<p id=${d.respostes[index][it][`idR`]}>${d.respostes[index][it][`resposta`]}</p>`;
+        }
+        strElement += `</td>`;
+        strElement += `<td>`;
+        for (let it = 0; it < d.respostes[index].length; it++) {
+            strElement += `<p>${d.respostes[index][it][`imatge`]}</p>`;
+        }
+        strElement += `</td>`;
         strElement += `<td>${d.respostesC[index]}</td>`;
         strElement += `<td><button class="eliminar">Eliminar</button><button class="editar">Editar</button></td>`;
         strElement += `</tr>`
     }
-    body.innerHTML= strElement;
+    body.innerHTML = strElement;
 }
 
-function eliminarFilera(id){
+function eliminarFilera(id) {
     const tr = document.getElementById(id);
-    
+
     if (tr) {
         tr.remove();
-        Swal.fire({
-            text: "Pregunta eliminada correctament",
-            icon: "success"
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+        Toast.fire({
+            icon: "success",
+            title: "Pregunta eliminada"
         });
     }
 }
 
-function confirmacioEliminacio(fila){
+function confirmacioEliminacio(idFila) {
     Swal.fire({
         icon: "warning",
         title: "Vols eliminar la pregunta?",
@@ -101,23 +135,112 @@ function confirmacioEliminacio(fila){
         confirmButtonText: "Si",
     }).then((result) => {
         if (result.isConfirmed) {
-            peticioEliminar(fila.id);
+            peticioEliminar(idFila);
         } else if (result.isDenied) {
             Swal.fire("Pregunta no eliminada");
         }
     });
 }
 
-function omplirFilera(tr, dades){
-    const values = [tr["id"],dades["enunciat"],dades["resposta"],dades["imatge"],dades["respCorrecta"]];
+function parseTdInput(tr) {
+    const allTd= tr.querySelectorAll("td");
+    allTd.forEach((td, i) => {
+        if (td !== tr.firstElementChild && td !== tr.lastElementChild) {
+            const allP = td.querySelectorAll("p");
+            if (allP.length > 0) {
+                allP.forEach(p => {
+                    const input = document.createElement("input");
+                    input.value = p.textContent;
+                    if (i == 2) input.id = p.id;
+                    p.remove();
+                    td.appendChild(input);
+                });
+            }else{
+                const input = document.createElement("input");
+                input.value = td.textContent;
+                td.innerHTML = '';
+                td.appendChild(input);
+            }
+        }
+    });
+}
 
-    for (let i = 0; i < 5; i++) {
-        const td = document.createElement("td");
-        td.textContent = values[i];
-        tr.appendChild(td);
+function carregarNovesDades(idTr) {
+    parseTdInput(document.getElementById(idTr));
+}
+
+/*function obtenirObjecte(inputs) {
+    const inputValue = {};
+
+    inputs.forEach((input, index) => {
+        inputValue[`input${index + 1}`] = input.value;
+    });
+
+    return inputValue;
+}*/
+
+function valorsInputs(id, inputs){
+    const arr = {
+        idPregunta: id,
+        enunciat: inputs[0].value,
+        respostaC: inputs[9].value,
+        respostes: []    
     }
-    const td = document.createElement("td");
+    for (let index = 1; index < 5; index++) {
+        const obj = {
+            id: inputs[index].id,
+            resposta: inputs[index].value,
+            imatge: inputs[index+4].value
+        }
+        arr["respostes"].push(obj);
+    }
 
+    return arr;
+}
+
+function actualitzarFilera(inputs) {
+    inputs.forEach(input => {
+        const td = input.parentElement;
+        const p = document.createElement('p');
+        p.textContent = input.value;
+        p.id = input.id;
+        td.appendChild(p);
+        input.remove();
+    });
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+    Toast.fire({
+        icon: "success",
+        title: "Pregunta actualitzada"
+    });
+}
+
+function omplirFilera(tr, fetchData, dades) {
+    const values = [fetchData["idP"], dades["enunciat"], dades["resposta"], dades["imatge"], dades["respCorrecta"]];
+
+    values.forEach((value, i) => {
+        const td = document.createElement("td");
+
+        if (i === 2 || i === 3) {
+            value.forEach((item, index) => {
+                const p = document.createElement("p");
+                p.textContent = item;
+                if (i === 2) p.id = fetchData["idR"][index];
+                td.appendChild(p);
+            });
+        } else {
+            td.textContent = value;
+        }
+
+        tr.appendChild(td);
+    });
+
+    const tdBotons = document.createElement("td");
     const btnEliminar = document.createElement("button");
     btnEliminar.className = "eliminar";
     btnEliminar.textContent = "Eliminar";
@@ -125,36 +248,74 @@ function omplirFilera(tr, dades){
     const btnEditar = document.createElement("button");
     btnEditar.className = "editar";
     btnEditar.textContent = "Editar";
-    td.appendChild(btnEliminar);
-    td.appendChild(btnEditar);
-    tr.appendChild(td);
+
+    tdBotons.appendChild(btnEliminar);
+    tdBotons.appendChild(btnEditar);
+    tr.appendChild(tdBotons);
 }
 
-function afegirFilera(d, obj){
+function afegirFilera(d, obj) {
     const body = document.getElementById("bodyTaula");
     const tr = body.appendChild(document.createElement("tr"));
-    tr.id = d["id"];
-    omplirFilera(tr,obj);
-    document.getElementById("divInsert").className="notUsable";
-    Swal.fire({
-        title: "Pregunta creada!",
-        icon: "success"
-      });
+    tr.id = `pregunta_${d["idP"]}`;
+    omplirFilera(tr, d, obj);
+    document.getElementById("divInsert").className = "notUsable";
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+    Toast.fire({
+        icon: "success",
+        title: "Pregunta creada"
+    });
 }
 
-function peticioEliminar(idTr){
+function peticioEliminar(idTr) {
     fetch("../back/admin/delete.php", {
         method: "POST",
-        body: JSON.stringify({idTr}),
+        body: JSON.stringify({ idTr }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => response.json())
+        .then(data => eliminarFilera(idTr))
+        .catch(error => {
+            Swal.fire({
+                title: "Error eliminant pregunta",
+                text: error,
+                icon: "error"
+            });
+        });
+}
+
+function peticioUpdate(idTr) {
+    //const obj = obtenirObjecte(document.getElementById(idTr).querySelectorAll("td:not(:first-child):not(:last-child) input"));
+    const allInput = Array.from(document.getElementById(idTr).querySelectorAll("td:not(:first-child):not(:last-child) input"));//m'he trobat que hi ha una funcio que fa el mateix, transforma el NodeList en array
+    const values = valorsInputs(idTr, allInput);
+
+    fetch("../back/admin/update.php", {
+        method: "POST",
+        body: JSON.stringify({ values }),
         headers: {
             "Content-Type": "application/json",
         },
     })
     .then(response => response.json())
-    .then(data => eliminarFilera(idTr));
+    .then(data => actualitzarFilera(allInput))
+    .catch(error => {
+        Swal.fire({
+            title: "Error actualitzant pregunta",
+            text: error.message,
+            icon: "error"
+        });
+    });
 }
 
-function peticioCrear(obj){
+function peticioCrear(obj) {
     fetch("../back/admin/insert.php", {
         method: "POST",
         body: JSON.stringify(obj),
@@ -162,6 +323,13 @@ function peticioCrear(obj){
             "Content-Type": "application/json",
         },
     })
-    .then(response => response.json())
-    .then(data => afegirFilera(data,obj));
+        .then(response => response.json())
+        .then(data => afegirFilera(data, obj))
+        .catch(error => {
+            Swal.fire({
+                title: "Error creant pregunta",
+                text: error,
+                icon: "error"
+            });
+        });
 }

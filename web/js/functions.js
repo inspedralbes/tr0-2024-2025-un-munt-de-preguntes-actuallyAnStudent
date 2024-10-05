@@ -19,6 +19,7 @@ function iniciar(){
   .then(response => response.json())
   .then(dades => partida(dades));
   const timer = document.getElementById("timer");
+  timer.style.color = 'black ';
   interval = setInterval(() => stillPlaying(timer), 1000);
 }
   
