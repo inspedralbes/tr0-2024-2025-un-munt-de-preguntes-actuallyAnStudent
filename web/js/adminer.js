@@ -20,49 +20,64 @@ function crearListener() {
         }
     });
 
-    document.getElementById("crear").addEventListener('click', (event) => {
-        document.getElementById("divInsert").className = "divInsert";
+    document.getElementById("crearContainer").addEventListener('click', (event) => {
+        if (event.target.id === "crear") {
+            event.target.id = "cancelar";
+            event.target.textContent = "Cancel·lar";
+            document.getElementById("divInsert").className = "divInsert";
+        } else if (event.target.id === "cancelar") {
+            event.target.id = "crear";
+            event.target.textContent = "Crear pregunta";
+            document.getElementById("divInsert").className = "notUsable";
+            reiniciarInputValues(document.getElementById("divInsert"));
+        }else if (event.target.id === "insert"){
+            const dadesP = {
+                enunciat: document.getElementById("enunciatPregunta").value.trim(),
+                respCorrecta: document.getElementById("respostaCorrecta").value.trim(),
+                imatge: [
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s"
+                ],
+                resposta: [
+                    document.getElementById("resposta1").value.trim(),
+                    document.getElementById("resposta2").value.trim(),
+                    document.getElementById("resposta3").value.trim(),
+                    document.getElementById("resposta4").value.trim()
+                ]
+            }
+            if (dadesP["enunciat"] && dadesP["respCorrecta"] && dadesP["resposta"][0] && dadesP["resposta"][1] && dadesP["resposta"][2] && dadesP["resposta"][3]) {
+                peticioCrear(dadesP);
+                const boto = document.getElementById("cancelar");
+                boto.id = "crear";
+                boto.textContent = "Crear pregunta";
+            } else {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+                Toast.fire({
+                    icon: "warning",
+                    title: "Tots els camps son obligatoris"
+                });
+            }
+        }
     });
 
-    document.getElementById("insert").addEventListener('click', (event) => {
-        const dadesP = {
-            enunciat: document.getElementById("enunciatPregunta").value.trim(),
-            respCorrecta: document.getElementById("respostaCorrecta").value.trim(),
-            imatge: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKgvmJ8Oz3pJmypAHKuOuXvfR5_iRg3rNJMQ&s"
-            ],
-            resposta: [
-                document.getElementById("resposta1").value.trim(),
-                document.getElementById("resposta2").value.trim(),
-                document.getElementById("resposta3").value.trim(),
-                document.getElementById("resposta4").value.trim()
-            ]
-        }
-        if (dadesP["enunciat"] && dadesP["respCorrecta"] && dadesP["resposta"][0] && dadesP["resposta"][1] && dadesP["resposta"][2] && dadesP["resposta"][3]) {
-            peticioCrear(dadesP);
-        } else {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true
-            });
-            Toast.fire({
-                icon: "warning",
-                title: "Tots els camps son obligatoris"
-            });
-        }
-    });
+    
 }
 
 function start() {
     fetch("../back/admin/getPreguntes.php")
         .then(response => response.json())
-        .then(data => imprimir(data));
+        .then(data => imprimir(data))
+        .catch(error => {
+            alert("Error obtenint les preguntes");
+        });
 }
 
 function imprimir(data) {
@@ -254,12 +269,19 @@ function omplirFilera(tr, fetchData, dades) {
     tr.appendChild(tdBotons);
 }
 
+function reiniciarInputValues(div){
+    const inputs = div.querySelectorAll("input");
+
+    inputs.forEach(input => input.value = '');
+}
+
 function afegirFilera(d, obj) {
     const body = document.getElementById("bodyTaula");
     const tr = body.appendChild(document.createElement("tr"));
     tr.id = `pregunta_${d["idP"]}`;
     omplirFilera(tr, d, obj);
     document.getElementById("divInsert").className = "notUsable";
+    reiniciarInputValues(document.getElementById("divInsert"));
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",

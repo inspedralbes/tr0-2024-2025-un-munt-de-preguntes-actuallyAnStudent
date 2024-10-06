@@ -8,7 +8,7 @@ const estatDeLaPartida =
 };
 
 function iniciar(){
-  document.getElementById("pagina").className = "pagina";
+  const pagina = document.getElementById("pagina");
   fetch("../back/getPreguntes.php", {
     method: "POST",
     body: JSON.stringify({num: localStorage.getItem("numPreguntes")}),
@@ -17,10 +17,17 @@ function iniciar(){
     },
   })
   .then(response => response.json())
-  .then(dades => partida(dades));
-  const timer = document.getElementById("timer");
-  timer.style.color = 'black ';
-  interval = setInterval(() => stillPlaying(timer), 1000);
+  .then(dades => {
+    partida(dades);
+    pagina.className = "pagina";
+    document.getElementById("inici").className = "notUsable";
+    const timer = document.getElementById("timer");
+    timer.style.color = 'black';
+    interval = setInterval(() => stillPlaying(timer), 1000);
+  })
+  .catch(error => {
+    alert("Error obtenint les preguntes");
+  });
 }
   
 function partida(info) {
@@ -63,7 +70,6 @@ function imprimirPregunta() {
 }
 
 function modificarPreguntes(idRespSel) {
-  console.log(idRespSel);
   let pregunta = {
     id: estatDeLaPartida.contPregunta,
     resposta: idRespSel
@@ -72,9 +78,11 @@ function modificarPreguntes(idRespSel) {
 }
 
 function mostrarResposta(){
-  const tauler = document.getElementById("respostaSelec");
+  const botoRes = document.getElementById(estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta]["resposta"]);
+  if (botoRes) botoRes.style.backgroundColor = "#007BFF";
+  /*const tauler = document.getElementById("respostaSelec");
   strElement = `<p>Opcio seleccionada: ${data.respostesP[estatDeLaPartida.contPregunta].etiqueta[estatDeLaPartida.preguntes[estatDeLaPartida.contPregunta].resposta]}</p>`;
-  tauler.innerHTML = strElement;
+  tauler.innerHTML = strElement;*/
 }
 
 function resetResposta() {
@@ -118,8 +126,8 @@ function enviarJSON() {
       return res.json()
     })
     .then(response => {
-      console.log(response);
-      strElement += `Felicitats ${localStorage.getItem("nomUsuari")}, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${data.preguntes.length}`;
+      strElement += `Felicitats ${localStorage.getItem("nomUsuari")}, has respos ${response.respostesCorrectes} bé i ${response.respostesIncorrectes} malament de ${data.preguntes.length}<br>`;
+      strElement += `No has respós ${response.noResposes}`;
       strElement += `<br><br><br><br><button class="tornarAJugar">Tornar a jugar</button>`
       tauler.innerHTML = strElement;
     })
@@ -152,7 +160,6 @@ function creacioListener(){
   document.getElementById("pagina").addEventListener('click', (event) => {
     if (event.target.tagName === 'BUTTON') {
       if (event.target.className === "resposta") {
-        console.log(event.target.id);
         modificarPreguntes(event.target.id);
       }
       if (event.target.className === "reset") {
@@ -164,8 +171,8 @@ function creacioListener(){
       if (event.target.className === "anterior") {
         lastQuestion();
       }
-      mostrarResposta();
       imprimirPregunta();
+      mostrarResposta();
     }
     if (event.target.className === "enviar") {
       ocultarBotons();
@@ -185,7 +192,6 @@ function creacioListener(){
       localStorage.setItem("numPreguntes", numP);
       
       if (localStorage.getItem("nomUsuari") && localStorage.getItem("numPreguntes")) {
-        document.getElementById("inici").className = "notUsable";
         iniciar();
       }
     }else if (event.target.className === "adminer") {

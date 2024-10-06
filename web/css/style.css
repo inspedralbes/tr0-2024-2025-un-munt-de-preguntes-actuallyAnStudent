@@ -87,11 +87,6 @@ button:hover {
   background-color: #e64a19;
 }
 
-#anterior,
-#seguent {
-  background-color: #007bff;
-}
-
 #anterior:hover,
 #seguent:hover {
   background-color: #0056b3;
@@ -103,11 +98,6 @@ button:hover {
 
 #enviar:hover {
   background-color: #218838;
-}
-
-#respostaSelec {
-  background-color: #ffc107;
-  cursor: default;
 }
 
 /* Estilo para el temporizador */
