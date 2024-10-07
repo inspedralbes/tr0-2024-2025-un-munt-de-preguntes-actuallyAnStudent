@@ -1,0 +1,130 @@
+#inici input {
+  width: fit-content;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgb(216, 245, 255);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#inici {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.notUsable {
+  display: none;
+}
+
+.pagina {
+  display: block;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.iniciar {
+  background-color: #28a745;
+}
+
+.iniciar:hover,
+#enviar:hover {
+  background-color: #218838;
+}
+
+.adminer {
+  background-color: #6c757d;
+}
+
+.adminer:hover {
+  background-color: #5a6268;
+}
+
+#botons button {
+  margin-top: 10px;
+}
+
+#reset {
+  background-color: #ff5722;
+}
+
+#reset:hover {
+  background-color: #e64a19;
+}
+
+#enviar {
+  background-color: #28a745;
+}
+
+#anterior:hover,
+#seguent:hover {
+  background-color: #0056b3;
+}
+
+#timer {
+  font-size: 3em;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#partida {
+  margin: 20px 0;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rtas {
+  display: inline-block;
+  margin: 10px;
+}
+
+.resposta {
+  display: block;
+  background-color: #17a2b8;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.resposta:hover {
+  background-color: #138496;
+}

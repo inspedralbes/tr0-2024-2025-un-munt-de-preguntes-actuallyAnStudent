@@ -1,12 +1,32 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Questionari projecte</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+    <div id="inici" class="inici">
+        <h1>Benvingut</h1>
+        <input type="text" id="nom" placeholder="Nom usuari">
+        <input type="number" id="nPreg" placeholder="Numero preguntes">
+        <br><button class="iniciar">JUGAR</button>
+        <br><button class="adminer">ADMINER</button>
+    </div>
+    <div id="pagina" class="notUsable">
+        <h1 id="timer"></h1>    
+        <div id="partida"></div>
+        <div id="botons">
+            <button id="reset" class="reset">Cancel·lar resposta</button>
+            <button id="anterior" class="anterior">Anterior</button>
+            <button id="seguent" class="seguent">Seguent</button>
+            <button id="enviar" class="enviar">Enviar</button>
+        </div>
+    </div>
+    <script src="js/functions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

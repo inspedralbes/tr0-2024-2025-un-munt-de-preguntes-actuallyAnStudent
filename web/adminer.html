@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adminer</title>
+    <link rel="stylesheet" href="css/styleAdminer.css">
+</head>
+<body>
+    <div id="crearContainer">
+        <button id="crear">Crear pregunta</button>
+        <div id="divInsert" class="notUsable">
+            <input type="text" id="enunciatPregunta" placeholder="Pregunta">
+            <input type="text" id="resposta1" placeholder="Resposta 1">
+            <input type="text" id="resposta2" placeholder="Resposta 2">
+            <input type="text" id="resposta3" placeholder="Resposta 3">
+            <input type="text" id="resposta4" placeholder="Resposta 4">
+            <input type="number" id="respostaCorrecta" placeholder="Resposta correcta">
+            <br><button id="insert">Crear</button>
+        </div>
+    </div>
+    <div id="taulerContainer">
+        <table style="width: 100%;">
+            <thead id="headerTaula"></thead>
+            <tbody id="bodyTaula"></tbody>
+        </table>
+    </div>
+    <script src="js/adminer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

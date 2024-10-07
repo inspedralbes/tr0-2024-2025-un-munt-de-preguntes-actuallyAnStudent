@@ -1,0 +1,74 @@
+body{
+  display: flex;
+  flex-direction: column;
+}
+table,td,th {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+#crearContainer{
+  padding: 30px;
+}
+
+#crearContainer input{
+  width: fit-content;
+}
+
+#taulerContainer{
+  padding: 0 30px 30px 30px;
+  justify-content: center;
+}
+
+.divFlexRow{
+  display: flex;
+  flex-direction: row;
+}
+
+#taulerContainer td{
+  text-align: center;
+}
+.notUsable {
+  display: none;
+}
+
+#insert{
+  margin-top: 20px;
+}
+
+.eliminar{
+  background-color: rgb(214, 66, 66);
+  margin-bottom: 10px;
+}
+
+.eliminar:hover {
+  background-color: rgb(156, 53, 53);
+}
+
+.editar:hover, #crear:hover {
+  background-color: #0056b3;
+}
+
+#bodyTaula tr:nth-child(2n-1) {
+  background-color:  rgb(216, 245, 255);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
