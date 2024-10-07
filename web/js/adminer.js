@@ -95,7 +95,7 @@ function imprimirHeader() {
     strElement += `<th>ID</th>`;
     strElement += `<th>Pregunta</th>`;
     strElement += `<th>Respostes</th>`;
-    strElement += `<th>Imatges</th>`;
+    strElement += `<th>Imatges Resposta</th>`;
     strElement += `<th>Resposta Correcta</th>`;
     strElement += `<th>Operacions</th>`;
     strElement += `</tr>`
@@ -166,11 +166,13 @@ function parseTdInput(tr) {
     allTd.forEach((td, i) => {
         if (td !== tr.firstElementChild && td !== tr.lastElementChild) {
             if (i == 3) {
-                const input = document.createElement("input");
-                const anchor = td.querySelector("a");
-                input.value = anchor.getAttribute("href");
-                anchor.remove();
-                td.appendChild(input)
+                const allA = td.querySelectorAll("a");
+                allA.forEach(a => {
+                    const input = document.createElement("input");
+                    input.value = a.getAttribute("href");
+                    a.parentElement.remove();
+                    td.appendChild(input);
+                });
             }else{
                 const allP = td.querySelectorAll("p");
                 if (allP.length > 0) {
@@ -226,12 +228,23 @@ function valorsInputs(id, inputs){
 }
 
 function actualitzarFilera(inputs) {
-    inputs.forEach(input => {
-        const td = input.parentElement;
-        const p = document.createElement('p');
-        p.textContent = input.value;
-        p.id = input.id;
-        td.appendChild(p);
+    inputs.forEach((input, i) => {
+        const parent = input.parentElement;
+        if (i>4 && i<9) {
+            const div = document.createElement('div');
+            div.style.margin = '16px 0';
+            const a = document.createElement('a');
+            a.href = input.value;
+            a.target = '_blank';
+            a.textContent = `Imatge ${i-4}`;
+            div.appendChild(a);
+            parent.appendChild(div);
+        }else{
+            const p = document.createElement('p');
+            p.textContent = input.value;
+            p.id = input.id;
+            parent.appendChild(p);
+        }
         input.remove();
     });
     const Toast = Swal.mixin({
@@ -253,16 +266,27 @@ function omplirFilera(tr, fetchData, dades) {
     values.forEach((value, i) => {
         const td = document.createElement("td");
 
-        if (i === 2 || i === 3) {
+        if (i === 2) {
             value.forEach((item, index) => {
                 const p = document.createElement("p");
                 p.textContent = item;
-                if (i === 2) p.id = fetchData["idR"][index];
+                p.id = fetchData["idR"][index];
                 td.appendChild(p);
             });
-        } else {
-            td.textContent = value;
-        }
+        } else if(i===3){
+            value.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.style.margin = '16px 0';
+
+                const a = document.createElement('a');
+                a.href = item;
+                a.target = '_blank';
+                a.textContent = `Imatge ${index+1}`;
+
+                div.appendChild(a);
+                td.appendChild(div);
+            });
+        }else td.textContent = value;
 
         tr.appendChild(td);
     });
