@@ -114,10 +114,10 @@ function imprimirBody(d) {
             strElement += `<p id=${d.respostes[index][it][`idR`]}>${d.respostes[index][it][`resposta`]}</p>`;
         }
         strElement += `</td>`;
-        strElement += `<td><br>`;
+        strElement += `<td>`;
         for (let it = 0; it < d.respostes[index].length; it++) {
-            //strElement += `<a target="_blank" href="${d.respostes[index][it][`imatge`]}"><p style="margin: 0">Imatge ${it+1}<p></a>`;
-            strElement += `<p>${d.respostes[index][it][`imatge`]}</p>`;
+            strElement += `<div style="margin: 16px 0"><a target="_blank" href="${d.respostes[index][it][`imatge`]}">Imatge ${it+1}</a></div>`;
+            //strElement += `<p>${d.respostes[index][it][`imatge`]}</p>`;
         }
         strElement += `</td>`;
         strElement += `<td>${d.respostesC[index]}</td>`;
@@ -165,20 +165,28 @@ function parseTdInput(tr) {
     const allTd= tr.querySelectorAll("td");
     allTd.forEach((td, i) => {
         if (td !== tr.firstElementChild && td !== tr.lastElementChild) {
-            const allP = td.querySelectorAll("p");
-            if (allP.length > 0) {
-                allP.forEach(p => {
-                    const input = document.createElement("input");
-                    input.value = p.textContent;
-                    if (i == 2) input.id = p.id;
-                    p.remove();
-                    td.appendChild(input);
-                });
-            }else{
+            if (i == 3) {
                 const input = document.createElement("input");
-                input.value = td.textContent;
-                td.innerHTML = '';
-                td.appendChild(input);
+                const anchor = td.querySelector("a");
+                input.value = anchor.getAttribute("href");
+                anchor.remove();
+                td.appendChild(input)
+            }else{
+                const allP = td.querySelectorAll("p");
+                if (allP.length > 0) {
+                    allP.forEach(p => {
+                        const input = document.createElement("input");
+                        input.value = p.textContent;
+                        if (i == 2) input.id = p.id;
+                        p.remove();
+                        td.appendChild(input);
+                    });
+                }else{
+                    const input = document.createElement("input");
+                    input.value = td.textContent;
+                    td.innerHTML = '';
+                    td.appendChild(input);
+                }
             }
         }
     });
