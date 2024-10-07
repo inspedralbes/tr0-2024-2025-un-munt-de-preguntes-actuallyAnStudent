@@ -6,9 +6,30 @@ table,td,th {
   border: 2px solid black;
   border-collapse: collapse;
 }
+a{
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+#crearContainer{
+  padding: 30px 30px 0px 30px;
+}
+
+#crearContainer input{
+  width: fit-content;
+}
+
 #taulerContainer{
   display: flex;
   flex-direction: row;
+  padding: 30px 0;
+  justify-content: center;
+  width: 100%;
+}
+
+
+#taulerContainer td{
+  text-align: center;
 }
 .notUsable {
   display: none;
@@ -20,59 +41,37 @@ table,td,th {
 
 .eliminar{
   background-color: rgb(214, 66, 66);
+  margin-bottom: 10px;
 }
 
-/*A partir de aqui hay que cambiar todo el css*/
-body {
-  font-family: Arial, sans-serif; /* Fuente general */
-  margin: 0; /* Elimina margen por defecto */
-  padding: 0; /* Elimina padding por defecto */
-  background-color: #f4f4f4; /* Color de fondo */
+.eliminar:hover {
+  background-color: rgb(156, 53, 53);
 }
 
-#miContenedor {
-  max-width: 600px; /* Ancho máximo del contenedor */
-  margin: 50px auto; /* Centra el contenedor vertical y horizontalmente */
-  padding: 20px; /* Padding interno */
-  background-color: #fff; /* Fondo blanco */
-  border-radius: 5px; /* Bordes redondeados */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+.editar:hover, #crear:hover {
+  background-color: #0056b3;
 }
 
-/* Estilos para el título */
-h1 {
-  text-align: center; /* Centra el texto */
-  color: #333; /* Color del texto */
+#bodyTaula tr:nth-child(2n-1) {
+  background-color:  rgb(216, 245, 255);
 }
 
-/* Estilos para los inputs */
 input[type="text"] {
-  width: 100%; /* Ancho completo */
-  padding: 10px; /* Espacio interno */
-  margin: 10px 0; /* Margen arriba y abajo */
-  border: 1px solid #ccc; /* Borde gris claro */
-  border-radius: 5px; /* Bordes redondeados */
-  font-size: 16px; /* Tamaño de fuente */
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
-/* Estilos para el botón */
 button {
-  width: 100%; /* Ancho completo */
-  padding: 10px; /* Espacio interno */
-  background-color: #007bff; /* Color de fondo */
-  color: white; /* Color del texto */
-  border: none; /* Sin borde */
-  border-radius: 5px; /* Bordes redondeados */
-  font-size: 16px; /* Tamaño de fuente */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-}
-
-/* Estilo para el botón al pasar el mouse */
-button:hover {
-  background-color: #0056b3; /* Color de fondo al pasar el mouse */
-}
-
-/* Estilo para el botón al hacer clic */
-button:active {
-  background-color: #004085; /* Color de fondo al hacer clic */
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
 }

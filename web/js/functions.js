@@ -52,7 +52,7 @@ function imprimirPregunta() {
   let strElement = '';
 
   strElement += `<p>${data.preguntes[estatDeLaPartida.contPregunta]}</p><br>`;
-  strElement += `<div style="display:flex">`;
+  strElement += `<div style="display:flex; justify-content:center">`;
   for (let i = 0; i < data.respostesP[estatDeLaPartida.contPregunta].etiqueta.length; i++) {
     strElement += `<div class="rtas">`;
     strElement += `<button id="${i}" class="resposta">${data.respostesP[estatDeLaPartida.contPregunta].etiqueta[i]}</button>`;
@@ -206,10 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function stillPlaying(place) {
   if (time >= 0) {
-    if (time<10) {
-      place.style.color='red';
-    }
-    place.innerHTML = time;
+    if (time<5 ) place.style.color='red';
+    else if( time <10 ) place.style.color='orange';
+    place.innerHTML = time+"s";
     time--;
   } else {
     ocultarBotons();

@@ -1,7 +1,10 @@
-/* Estilos globales */
+#inici input {
+  width: fit-content;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: rgb(216, 245, 255);
   margin: 0;
   padding: 0;
   display: flex;
@@ -10,7 +13,6 @@ body {
   height: 100vh;
 }
 
-/* Estilos para el contenedor de inicio */
 #inici {
   background-color: #fff;
   padding: 20px;
@@ -21,7 +23,6 @@ body {
   width: 100%;
 }
 
-/* Ocultar la página hasta que se active */
 .notUsable {
   display: none;
 }
@@ -30,7 +31,6 @@ body {
   display: block;
 }
 
-/* Estilo para los inputs */
 input[type="text"],
 input[type="number"] {
   width: 100%;
@@ -41,7 +41,6 @@ input[type="number"] {
   font-size: 16px;
 }
 
-/* Estilo para los botones */
 button {
   padding: 10px 20px;
   margin: 10px 5px;
@@ -62,7 +61,8 @@ button:hover {
   background-color: #28a745;
 }
 
-.iniciar:hover {
+.iniciar:hover,
+#enviar:hover {
   background-color: #218838;
 }
 
@@ -74,7 +74,6 @@ button:hover {
   background-color: #5a6268;
 }
 
-/* Botones de la página del cuestionario */
 #botons button {
   margin-top: 10px;
 }
@@ -87,27 +86,21 @@ button:hover {
   background-color: #e64a19;
 }
 
+#enviar {
+  background-color: #28a745;
+}
+
 #anterior:hover,
 #seguent:hover {
   background-color: #0056b3;
 }
 
-#enviar {
-  background-color: #28a745;
-}
-
-#enviar:hover {
-  background-color: #218838;
-}
-
-/* Estilo para el temporizador */
 #timer {
   font-size: 3em;
   text-align: center;
   margin-top: 20px;
 }
 
-/* Estilo para el contenedor de la partida */
 #partida {
   margin: 20px 0;
   background-color: #fff;
@@ -116,7 +109,6 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para los botones de respuestas */
 .rtas {
   display: inline-block;
   margin: 10px;
@@ -135,16 +127,4 @@ button:hover {
 
 .resposta:hover {
   background-color: #138496;
-}
-
-/* Para pantallas pequeñas */
-@media (max-width: 600px) {
-  #inici, #pagina {
-      width: 90%;
-  }
-
-  button {
-      width: 100%;
-      margin: 5px 0;
-  }
 }

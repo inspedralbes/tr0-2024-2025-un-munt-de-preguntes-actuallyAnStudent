@@ -111,8 +111,9 @@ function imprimirBody(d) {
             strElement += `<p id=${d.respostes[index][it][`idR`]}>${d.respostes[index][it][`resposta`]}</p>`;
         }
         strElement += `</td>`;
-        strElement += `<td>`;
+        strElement += `<td><br>`;
         for (let it = 0; it < d.respostes[index].length; it++) {
+            //strElement += `<a target="_blank" href="${d.respostes[index][it][`imatge`]}"><p style="margin: 0">Imatge ${it+1}<p></a>`;
             strElement += `<p>${d.respostes[index][it][`imatge`]}</p>`;
         }
         strElement += `</td>`;
