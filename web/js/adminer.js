@@ -10,10 +10,13 @@ function crearListener() {
         if (event.target.className === "eliminar") {
             confirmacioEliminacio(fila.id);
         } else if (event.target.className === "editar") {
+            fila.querySelector("button").className="notUsable";
             carregarNovesDades(fila.id);
+            document.getElementById("eliminar")
             event.target.className = "guardar";
             event.target.textContent = "Guardar";
         } else if (event.target.className === "guardar") {
+            fila.querySelector("button").className="eliminar";
             peticioUpdate(fila.id);
             event.target.className = "editar";
             event.target.textContent = "Editar";
